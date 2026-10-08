@@ -1,0 +1,26 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}Dashboard · Portfolio CMS{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+  {% for label in "Projects,Tech Stack,Services,Social Links"|make_list %}{% endfor %}
+  <div class="rounded-md border border-neutral-200 p-4">
+    <p class="text-xs text-neutral-500">Projects</p>
+    <p class="mt-1 text-2xl font-semibold">0</p>
+  </div>
+  <div class="rounded-md border border-neutral-200 p-4">
+    <p class="text-xs text-neutral-500">Tech Stack</p>
+    <p class="mt-1 text-2xl font-semibold">0</p>
+  </div>
+  <div class="rounded-md border border-neutral-200 p-4">
+    <p class="text-xs text-neutral-500">Services</p>
+    <p class="mt-1 text-2xl font-semibold">0</p>
+  </div>
+  <div class="rounded-md border border-neutral-200 p-4">
+    <p class="text-xs text-neutral-500">Social Links</p>
+    <p class="mt-1 text-2xl font-semibold">0</p>
+  </div>
+</div>
+{% endblock %}

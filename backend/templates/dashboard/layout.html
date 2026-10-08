@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="min-h-full">
+  <header class="flex h-14 items-center justify-between border-b border-neutral-200 px-6">
+    <a href="/dashboard/" class="text-sm font-semibold tracking-tight">Portfolio CMS</a>
+    <div class="text-sm text-neutral-600">
+      {% if user.is_authenticated %}{{ user.username }}{% else %}Guest{% endif %}
+    </div>
+  </header>
+
+  <div class="flex">
+    <aside class="hidden min-h-[calc(100vh-3.5rem)] w-56 shrink-0 border-r border-neutral-200 p-3 md:block">
+      <nav class="space-y-0.5 text-sm">
+        {% with base="block rounded-md px-3 py-1.5" on="bg-neutral-100 font-medium text-neutral-900" off="text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900" %}
+        <a href="/dashboard/" class="{{ base }} {% if request.path == '/dashboard/' %}{{ on }}{% else %}{{ off }}{% endif %}">Dashboard</a>
+        <a href="/dashboard/projects/" class="{{ base }} {% if '/dashboard/projects' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">Projects</a>
+        <a href="/dashboard/tech-stack/" class="{{ base }} {% if '/dashboard/tech-stack' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">Tech Stack</a>
+        <a href="/dashboard/services/" class="{{ base }} {% if '/dashboard/services' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">Services</a>
+        <a href="/dashboard/socials/" class="{{ base }} {% if '/dashboard/socials' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">Socials</a>
+        <div class="my-3 border-t border-neutral-200"></div>
+        <a href="/dashboard/api/" class="{{ base }} {% if '/dashboard/api' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">API</a>
+        <a href="/dashboard/settings/" class="{{ base }} {% if '/dashboard/settings' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}">Settings</a>
+        {% endwith %}
+      </nav>
+    </aside>
+
+    <main class="min-w-0 flex-1 px-6 py-8 md:px-10">
+      <div class="mx-auto max-w-5xl">
+        <p class="mb-1 text-xs text-neutral-500">{% block breadcrumb %}Dashboard{% endblock %}</p>
+        <h1 class="mb-6 text-xl font-semibold tracking-tight">{% block heading %}{% endblock %}</h1>
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}
