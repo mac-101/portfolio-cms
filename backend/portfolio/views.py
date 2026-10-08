@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -10,7 +11,13 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView
 
-from .forms import ProjectForm, ServiceForm, SocialLinkForm, TechStackForm
+from .forms import (
+    PortfolioForm,
+    ProjectForm,
+    ServiceForm,
+    SocialLinkForm,
+    TechStackForm,
+)
 from .models import Project, Service, SocialLink, TechStack
 
 def api_base(request, portfolio):
@@ -88,12 +95,92 @@ def settings_view(request):
         return redirect("settings")
     return render(request, "dashboard/settings.html", {"form": form, "portfolio": portfolio})
 
+def build_endpoints(base, portfolio):
+    project = {
+        "title": "EchoNote",
+        "slug": "echonote",
+        "description": "A Django notes application.",
+        "image": "https://res.cloudinary.com/your-cloud/image/upload/echonote.jpg",
+        "tech_stack": ["Python", "Django"],
+        "github_url": "https://github.com/you/echonote",
+        "live_url": "https://echonote.example.com",
+        "featured": True,
+        "created_at": "2026-10-08T21:14:03Z",
+    }
+
+    def listing(item):
+        return {"count": 1, "next": None, "previous": None, "results": [item]}
+
+    endpoints = [
+        {
+            "title": "Portfolio",
+            "path": "",
+            "description": "Your public profile details.",
+            "example": {
+                "name": portfolio.name,
+                "slug": portfolio.slug,
+                "bio": "Backend developer building APIs.",
+                "profile_image": None,
+                "location": "City, Country",
+                "email": "you@example.com",
+            },
+        },
+        {
+            "title": "Projects",
+            "path": "projects/",
+            "description": "All published projects, newest first. Drafts are never included.",
+            "params": "?featured=true  ·  ?page=2  ·  ?page_size=10",
+            "example": listing(project),
+        },
+        {
+            "title": "Project detail",
+            "path": "projects/echonote/",
+            "description": "One published project, looked up by its slug.",
+            "example": project,
+        },
+        {
+            "title": "Tech stack",
+            "path": "tech-stack/",
+            "description": "Your technologies, sorted by name.",
+            "example": listing({"name": "Django", "slug": "django", "icon": ""}),
+        },
+        {
+            "title": "Services",
+            "path": "services/",
+            "description": "The services you offer.",
+            "example": listing({
+                "title": "Web Development",
+                "description": "Modern, responsive websites.",
+                "icon": "",
+            }),
+        },
+        {
+            "title": "Social links",
+            "path": "socials/",
+            "description": "Links to your profiles.",
+            "example": listing({
+                "platform": "GitHub",
+                "url": "https://github.com/you",
+                "label": "",
+            }),
+        },
+    ]
+
+    for ep in endpoints:
+        ep["url"] = base + ep["path"]
+        ep["example_json"] = json.dumps(ep["example"], indent=2)
+    return endpoints
+
 
 @login_required
 def api_info(request):
     portfolio = request.user.portfolio
-    return render(request, "dashboard/api.html", {"api_url": api_base(request, portfolio)})
-
+    base = api_base(request, portfolio)
+    return render(request, "dashboard/api.html", {
+        "base_url": base,
+        "endpoints": build_endpoints(base, portfolio),
+    })
+    
 class PortfolioMixin(LoginRequiredMixin):
     """Only ever returns objects that belong to the logged-in user's portfolio."""
 
