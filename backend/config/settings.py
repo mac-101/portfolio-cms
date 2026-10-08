@@ -99,6 +99,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # fine for a public read-only API; tighten later 
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/dashboard/"
+LOGOUT_REDIRECT_URL = "/login/"
 
 
 # Password validation

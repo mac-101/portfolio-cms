@@ -4,8 +4,12 @@
 <div class="min-h-full">
   <header class="flex h-14 items-center justify-between border-b border-neutral-200 px-6">
     <a href="/dashboard/" class="text-sm font-semibold tracking-tight">Portfolio CMS</a>
-    <div class="text-sm text-neutral-600">
-      {% if user.is_authenticated %}{{ user.username }}{% else %}Guest{% endif %}
+    <div class="flex items-center gap-4 text-sm text-neutral-600">
+        <span>{{ user.username }}</span>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="text-neutral-600 hover:text-neutral-900">Log out</button>
+        </form>
     </div>
   </header>
 
