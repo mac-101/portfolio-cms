@@ -1,0 +1,30 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}{% if object %}Edit{% else %}Add{% endif %} {{ label }} · Portfolio CMS{% endblock %}
+{% block breadcrumb %}Dashboard / {{ section }} / {% if object %}Edit{% else %}New{% endif %}{% endblock %}
+{% block heading %}{% if object %}Edit{% else %}Add{% endif %} {{ label|lower }}{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="max-w-xl space-y-4">
+  {% csrf_token %}
+  {% for error in form.non_field_errors %}<p class="text-sm text-red-600">{{ error }}</p>{% endfor %}
+
+  {% for field in form %}
+  <div>
+    {% if field.widget_type == "checkbox" %}
+      <label class="flex items-center gap-2 text-sm font-medium">{{ field }} {{ field.label }}</label>
+    {% else %}
+      <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+      {{ field }}
+    {% endif %}
+    {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+    {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="flex items-center gap-3 pt-2">
+    <button type="submit" class="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800">Save</button>
+    <a href="{{ list_url }}" class="text-sm text-neutral-600 hover:text-neutral-900">Cancel</a>
+  </div>
+</form>
+{% endblock %}

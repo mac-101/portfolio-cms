@@ -1,0 +1,16 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}Delete {{ label }} · Portfolio CMS{% endblock %}
+{% block breadcrumb %}Dashboard / {{ section }} / Delete{% endblock %}
+{% block heading %}Delete {{ label|lower }}{% endblock %}
+
+{% block content %}
+<form method="post" class="max-w-xl rounded-md border border-neutral-200 p-5">
+  {% csrf_token %}
+  <p class="text-sm">Delete <strong>{{ object }}</strong>? This can't be undone.</p>
+  <div class="mt-5 flex items-center gap-3">
+    <button type="submit" class="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">Delete</button>
+    <a href="{{ list_url }}" class="text-sm text-neutral-600 hover:text-neutral-900">Cancel</a>
+  </div>
+</form>
+{% endblock %}

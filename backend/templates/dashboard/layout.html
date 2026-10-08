@@ -31,6 +31,11 @@
 
     <main class="min-w-0 flex-1 px-6 py-8 md:px-10">
       <div class="mx-auto max-w-5xl">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <p class="mb-1 text-xs text-neutral-500">{% block breadcrumb %}Dashboard{% endblock %}</p>
         <h1 class="mb-6 text-xl font-semibold tracking-tight">{% block heading %}{% endblock %}</h1>
         {% block content %}{% endblock %}

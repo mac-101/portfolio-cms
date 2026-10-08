@@ -1,0 +1,10 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}API · Portfolio CMS{% endblock %}
+{% block breadcrumb %}Dashboard / API{% endblock %}
+{% block heading %}API{% endblock %}
+
+{% block content %}
+<p class="mb-2 text-sm text-neutral-600">Base URL</p>
+<code class="block rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-xs">{{ api_url }}</code>
+{% endblock %}
