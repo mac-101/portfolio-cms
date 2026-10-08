@@ -97,7 +97,16 @@ STORAGES = {
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
 }
 
-CORS_ALLOW_ALL_ORIGINS = True  # fine for a public read-only API; tighten later if needed
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    "DEFAULT_PAGINATION_CLASS": "api.pagination.StandardPagination",
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_URLS_REGEX = r"^/api/.*$"          # CORS only applies to the API, not the dashboard
+CORS_ALLOW_METHODS = ["GET", "HEAD", "OPTIONS"]
+
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/dashboard/"

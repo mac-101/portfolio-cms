@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("dashboard/", include("portfolio.urls")),
+    path("api/public/", include("api.urls")),
     path("", include("accounts.urls")),
     path("", RedirectView.as_view(pattern_name="dashboard_home", permanent=False)),
 ]
