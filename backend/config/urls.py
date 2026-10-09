@@ -9,7 +9,7 @@ urlpatterns = [
     path("dashboard/", include("portfolio.urls")),
     path("api/public/", include("api.urls")),
     path("", include("accounts.urls")),
-    path("", RedirectView.as_view(pattern_name="dashboard_home", permanent=False)),
+    path("", include("landing.urls")),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,56 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}Contact · Portfolio CMS{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Contact{% endblock %}
+{% block heading %}Contact{% endblock %}
+
+{% block content %}
+<div class="grid min-w-0 gap-6 lg:grid-cols-5 lg:gap-8">
+  <section class="space-y-4 lg:col-span-2">
+    <div>
+      <h2 class="text-sm font-semibold">How can we help?</h2>
+      <p class="mt-2 text-sm leading-relaxed text-neutral-600">Send a message about your account or anything that isn’t working as expected. We’ll reply to the email address you provide.</p>
+    </div>
+
+    {% if contact_email or contact_github %}
+    <div class="rounded-md border border-neutral-200 p-4">
+      <h3 class="text-sm font-medium">Other ways to reach us</h3>
+      <dl class="mt-3 space-y-3 text-sm">
+        {% if contact_email %}
+        <div>
+          <dt class="text-xs text-neutral-500">Email</dt>
+          <dd class="mt-0.5"><a href="mailto:{{ contact_email }}" class="break-all underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ contact_email }}</a></dd>
+        </div>
+        {% endif %}
+        {% if contact_github %}
+        <div>
+          <dt class="text-xs text-neutral-500">GitHub</dt>
+          <dd class="mt-0.5"><a href="{{ contact_github }}" target="_blank" rel="noopener noreferrer" class="break-all underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ contact_github }}</a></dd>
+        </div>
+        {% endif %}
+      </dl>
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="min-w-0 rounded-md border border-neutral-200 p-4 sm:p-6 lg:col-span-3">
+    <h2 class="mb-1 text-sm font-semibold">Send a message</h2>
+    <p class="mb-5 text-xs text-neutral-500">Fields marked as required must be completed before sending.</p>
+    <form method="post" class="space-y-5"
+          onsubmit="var b=this.querySelector('[type=submit]'); b.disabled=true; b.textContent='Sending…';">
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}<p class="text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
+      {% for field in form %}
+      <div>
+        <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+        {% for error in field.errors %}<p class="mt-1 text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
+      </div>
+      {% endfor %}
+      <button type="submit"
+              class="{{ primary_button_classes }} inline-flex min-h-11 w-full items-center justify-center px-4 py-2.5 text-base font-medium transition-colors disabled:opacity-60 motion-reduce:transition-none sm:w-auto sm:text-sm">Send message</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

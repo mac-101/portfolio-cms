@@ -25,7 +25,7 @@
 
   <div class="flex pt-14">
     <aside id="dashboard-sidebar" aria-label="Dashboard navigation" aria-hidden="true"
-           class="fixed inset-y-0 left-0 z-40 w-64 -translate-x-full overflow-y-auto border-r border-neutral-200 bg-white p-3 transition-transform duration-200 motion-reduce:transition-none md:inset-y-auto md:top-14 md:bottom-0 md:w-56 md:translate-x-0 md:transition-none">
+           class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col overflow-y-auto border-r border-neutral-200 bg-white p-3 transition-transform duration-200 motion-reduce:transition-none md:inset-y-auto md:top-14 md:bottom-0 md:w-56 md:translate-x-0 md:transition-none">
       <div class="mb-3 flex items-center justify-between md:hidden">
         <span class="px-3 text-sm font-semibold">Navigation</span>
         <button id="sidebar-close" type="button" aria-label="Close navigation menu"
@@ -35,16 +35,22 @@
           </svg>
         </button>
       </div>
-      <nav class="space-y-0.5 text-sm">
+      <nav class="flex relative min-h-0 flex-1 flex-col space-y-0.5 text-sm">
         {% with base="block rounded-md px-3 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2" on="bg-neutral-100 font-medium text-neutral-900" off="text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900" %}
-        <a href="/dashboard/" class="{{ base }} {% if request.path == '/dashboard/' %}{{ on }}{% else %}{{ off }}{% endif %}" {% if request.path == '/dashboard/' %}aria-current="page"{% endif %}>Dashboard</a>
-        <a href="/dashboard/projects/" class="{{ base }} {% if '/dashboard/projects' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/projects' in request.path %}aria-current="page"{% endif %}>Projects</a>
-        <a href="/dashboard/tech-stack/" class="{{ base }} {% if '/dashboard/tech-stack' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/tech-stack' in request.path %}aria-current="page"{% endif %}>Tech Stack</a>
-        <a href="/dashboard/services/" class="{{ base }} {% if '/dashboard/services' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/services' in request.path %}aria-current="page"{% endif %}>Services</a>
-        <a href="/dashboard/socials/" class="{{ base }} {% if '/dashboard/socials' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/socials' in request.path %}aria-current="page"{% endif %}>Socials</a>
-        <div class="my-3 border-t border-neutral-200"></div>
-        <a href="/dashboard/api/" class="{{ base }} {% if '/dashboard/api' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/api' in request.path %}aria-current="page"{% endif %}>API</a>
-        <a href="/dashboard/settings/" class="{{ base }} {% if '/dashboard/settings' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/settings' in request.path %}aria-current="page"{% endif %}>Settings</a>
+        <div class="space-y-0.5">
+          <a href="/dashboard/" class="{{ base }} {% if request.path == '/dashboard/' %}{{ on }}{% else %}{{ off }}{% endif %}" {% if request.path == '/dashboard/' %}aria-current="page"{% endif %}>Dashboard</a>
+          <a href="/dashboard/projects/" class="{{ base }} {% if '/dashboard/projects' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/projects' in request.path %}aria-current="page"{% endif %}>Projects</a>
+          <a href="/dashboard/tech-stack/" class="{{ base }} {% if '/dashboard/tech-stack' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/tech-stack' in request.path %}aria-current="page"{% endif %}>Tech Stack</a>
+          <a href="/dashboard/services/" class="{{ base }} {% if '/dashboard/services' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/services' in request.path %}aria-current="page"{% endif %}>Services</a>
+          <a href="/dashboard/socials/" class="{{ base }} {% if '/dashboard/socials' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/socials' in request.path %}aria-current="page"{% endif %}>Socials</a>
+          <div class="my-3 border-t border-neutral-200"></div>
+          <a href="/dashboard/api/" class="{{ base }} {% if '/dashboard/api' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/api' in request.path %}aria-current="page"{% endif %}>API</a>
+          <a href="/dashboard/settings/" class="{{ base }} {% if '/dashboard/settings' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/settings' in request.path %}aria-current="page"{% endif %}>Settings</a>
+        </div>
+        <div class="mt-auto absolute bottom-0 left-0 right-0 space-y-0.5 border-t border-neutral-200 pt-3">
+          <a href="{% url 'dashboard_feedback' %}" class="{{ base }} {% if '/dashboard/feedback' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/feedback' in request.path %}aria-current="page"{% endif %}>Leave feedback</a>
+          <a href="{% url 'dashboard_contact' %}" class="{{ base }} {% if '/dashboard/contact' in request.path %}{{ on }}{% else %}{{ off }}{% endif %}" {% if '/dashboard/contact' in request.path %}aria-current="page"{% endif %}>Contact</a>
+        </div>
         {% endwith %}
       </nav>
     </aside>

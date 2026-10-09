@@ -1,4 +1,5 @@
 from django.urls import path
+from landing import views as landing_views
 from . import views
 
 urlpatterns = [
@@ -28,4 +29,7 @@ urlpatterns = [
 
     path("settings/", views.settings_view, name="settings"),
     path("api/", views.api_info, name="api_info"),
+    
+    path("feedback/", landing_views.dashboard_feedback, name="dashboard_feedback"),
+    path("contact/", landing_views.dashboard_contact, name="dashboard_contact"),
 ]

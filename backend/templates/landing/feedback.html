@@ -1,0 +1,13 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}Leave feedback · Portfolio CMS{% endblock %}
+{% block breadcrumb %}Dashboard / Feedback{% endblock %}
+{% block heading %}Leave feedback{% endblock %}
+
+{% block content %}
+<p class="mb-6 max-w-xl text-sm text-neutral-600">Tell us what's useful, what's missing, or what you'd want the Catalog Library to support. Feedback is never shown publicly.</p>
+<div class="max-w-xl">
+  {% url 'dashboard_feedback' as feedback_action %}
+  {% include "landing/partials/_feedback_form.html" with action=feedback_action %}
+</div>
+{% endblock %}
