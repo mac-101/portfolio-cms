@@ -1,28 +1,28 @@
 {% extends "dashboard/layout.html" %}
 
 {% block title %}Social Links · Portfolio CMS{% endblock %}
-{% block breadcrumb %}Dashboard / Socials{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Socials{% endblock %}
 {% block heading %}Social Links{% endblock %}
+{% block heading_action %}<a href="{% url 'social_create' %}" class="{{ primary_button_classes }} inline-flex w-fit items-center px-3 py-1.5 text-sm font-medium">+ Add Social Link</a>{% endblock %}
 
 {% block content %}
-<div class="mb-4 flex justify-end">
-  <a href="{% url 'social_create' %}" class="rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-neutral-800">+ Add Social Link</a>
-</div>
-
 <div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
   {% for item in items %}
-  <div class="flex items-center justify-between gap-4 px-4 py-3 text-sm">
-    <div class="min-w-0">
-      <span class="font-medium">{{ item.platform }}</span>
-      <span class="ml-3 truncate text-xs text-neutral-500">{{ item.url }}</span>
+  <div class="flex flex-col gap-3 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+    <div class="min-w-0 flex-1">
+      <span class="break-words font-medium">{{ item.platform }}</span>
+      <span class="ml-0 block max-w-full truncate text-xs text-neutral-500 sm:ml-3 sm:inline-block sm:align-bottom">{{ item.url }}</span>
     </div>
-    <span class="flex shrink-0 items-center gap-4 text-xs">
-      <a href="{% url 'social_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900">Edit</a>
-      <a href="{% url 'social_delete' item.pk %}" class="text-red-600 hover:text-red-700">Delete</a>
+    <span class="flex items-center gap-4 text-xs sm:shrink-0">
+      <a href="{% url 'social_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Edit</a>
+      <a href="{% url 'social_delete' item.pk %}" class="{{ destructive_link_classes }}">Delete</a>
     </span>
   </div>
   {% empty %}
-  <p class="px-4 py-8 text-center text-sm text-neutral-500">No social links yet.</p>
+  <div class="px-4 py-8 text-center">
+    <p class="text-sm text-neutral-500">No social links yet.</p>
+    <a href="{% url 'social_create' %}" class="{{ primary_button_classes }} mt-3 inline-flex px-3 py-1.5 text-sm font-medium">Add your first social link</a>
+  </div>
   {% endfor %}
 </div>
 {% endblock %}
