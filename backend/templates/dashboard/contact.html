@@ -1,6 +1,6 @@
 {% extends "dashboard/layout.html" %}
 
-{% block title %}Contact · Portfolio CMS{% endblock %}
+{% block title %}Contact · My Portfolio CMS{% endblock %}
 {% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Contact{% endblock %}
 {% block heading %}Contact{% endblock %}
 
@@ -36,8 +36,7 @@
   <section class="min-w-0 rounded-md border border-neutral-200 p-4 sm:p-6 lg:col-span-3">
     <h2 class="mb-1 text-sm font-semibold">Send a message</h2>
     <p class="mb-5 text-xs text-neutral-500">Fields marked as required must be completed before sending.</p>
-    <form method="post" class="space-y-5"
-          onsubmit="var b=this.querySelector('[type=submit]'); b.disabled=true; b.textContent='Sending…';">
+    <form method="post" class="space-y-5" data-loading-form>
       {% csrf_token %}
       {% for error in form.non_field_errors %}<p class="text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
       {% for field in form %}
@@ -49,7 +48,7 @@
       </div>
       {% endfor %}
       <button type="submit"
-              class="{{ primary_button_classes }} inline-flex min-h-11 w-full items-center justify-center px-4 py-2.5 text-base font-medium transition-colors disabled:opacity-60 motion-reduce:transition-none sm:w-auto sm:text-sm">Send message</button>
+              data-loading-text="Sending…" class="{{ primary_button_classes }} inline-flex min-h-11 w-full items-center justify-center px-4 py-2.5 text-base font-medium transition-colors disabled:opacity-60 motion-reduce:transition-none sm:w-auto sm:text-sm">Send message</button>
     </form>
   </section>
 </div>

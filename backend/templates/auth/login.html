@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Log in · Portfolio CMS{% endblock %}
+{% block title %}Log in · My Portfolio CMS{% endblock %}
 
 {% block body %}
 <div class="flex min-h-full items-center justify-center px-4 py-12">
   <div class="w-full max-w-sm">
     <h1 class="mb-6 text-xl font-semibold tracking-tight">Log in</h1>
 
-    <form method="post" class="space-y-5 {{ auth_control_classes }}">
+    <form method="post" class="space-y-5 {{ auth_control_classes }}" data-loading-form>
       {% csrf_token %}
       {% for error in form.non_field_errors %}<p class="text-xs text-red-600">{{ error }}</p>{% endfor %}
       {% for field in form %}
@@ -17,7 +17,7 @@
         </div>
       {% endfor %}
       <input type="hidden" name="next" value="{{ next }}">
-      <button type="submit" class="{{ primary_button_classes }} min-h-11 w-full px-3 py-2.5 text-base font-medium sm:text-sm">Log in</button>
+      <button type="submit" data-loading-text="Logging in…" class="{{ primary_button_classes }} min-h-11 w-full px-3 py-2.5 text-base font-medium sm:text-sm">Log in</button>
     </form>
 
     <p class="mt-6 text-sm text-neutral-600">New here? <a href="{% url 'signup' %}" class="font-medium text-neutral-900 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Create an account</a></p>

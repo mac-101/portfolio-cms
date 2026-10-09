@@ -1,11 +1,11 @@
 {% extends "dashboard/layout.html" %}
 
-{% block title %}{% if object %}Edit{% else %}Add{% endif %} {{ label }} · Portfolio CMS{% endblock %}
+{% block title %}{% if object %}Edit{% else %}Add{% endif %} {{ label }} · My Portfolio CMS{% endblock %}
 {% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / <a href="{{ list_url }}" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ section }}</a> / {% if object %}Edit{% else %}New{% endif %}{% endblock %}
 {% block heading %}{% if object %}Edit{% else %}Add{% endif %} {{ label|lower }}{% endblock %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data" class="max-w-xl space-y-5 {{ form_control_classes }}">
+<form method="post" enctype="multipart/form-data" class="max-w-xl space-y-5 {{ form_control_classes }}" data-loading-form>
   {% csrf_token %}
   {% for error in form.non_field_errors %}<p class="text-xs text-red-600">{{ error }}</p>{% endfor %}
 
@@ -26,7 +26,7 @@
   {% endfor %}
 
   <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
-    <button type="submit" class="{{ primary_button_classes }} min-h-11 w-full px-4 py-2.5 text-base font-medium sm:w-auto sm:py-2 sm:text-sm">Save</button>
+    <button type="submit" data-loading-text="Saving…" class="{{ primary_button_classes }} min-h-11 w-full px-4 py-2.5 text-base font-medium sm:w-auto sm:py-2 sm:text-sm">Save</button>
     <a href="{{ list_url }}" class="text-sm text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Cancel</a>
   </div>
 </form>

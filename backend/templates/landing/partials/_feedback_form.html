@@ -1,5 +1,5 @@
 {% url 'feedback' as default_action %}
-<form method="post" action="{{ action|default:default_action }}" class="space-y-4" data-feedback-form>  {% csrf_token %}
+<form method="post" action="{{ action|default:default_action }}" class="space-y-4" data-feedback-form data-loading-form>
 
   {% if form.non_field_errors %}
   <div role="alert" class="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -20,22 +20,6 @@
     {% endif %}
   {% endfor %}
 
-  <button type="submit" data-submit
+  <button type="submit" data-submit data-loading-text="Sending…"
           class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 disabled:opacity-60 motion-reduce:transition-none sm:w-auto">Share feedback</button>
 </form>
-
-<script>
-  document.querySelectorAll("[data-feedback-form]").forEach(function (form) {
-    var btn = form.querySelector("[data-submit]");
-    form.addEventListener("submit", function () {
-      btn.disabled = true;
-      btn.textContent = "Sending…";
-    });
-  });
-  window.addEventListener("pageshow", function () {
-    document.querySelectorAll("[data-submit]").forEach(function (b) {
-      b.disabled = false;
-      b.textContent = "Share feedback";
-    });
-  });
-</script>

@@ -10,13 +10,13 @@
           <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
-      <a href="/dashboard/" class="truncate text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Portfolio CMS</a>
+      <a href="/dashboard/" class="truncate text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">My Portfolio CMS</a>
     </div>
     <div class="ml-3 flex shrink-0 items-center gap-3 text-sm text-neutral-600 sm:gap-4">
       <span class="hidden sm:inline">{{ user.username }}</span>
-      <form method="post" action="{% url 'logout' %}">
+      <form method="post" action="{% url 'logout' %}" data-loading-form>
         {% csrf_token %}
-        <button type="submit" class="whitespace-nowrap text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Log out</button>
+        <button type="submit" data-loading-text="Logging out…" class="whitespace-nowrap text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Log out</button>
       </form>
     </div>
   </header>

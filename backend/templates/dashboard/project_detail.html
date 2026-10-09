@@ -1,6 +1,6 @@
 {% extends "dashboard/layout.html" %}
 
-{% block title %}{{ object.title }} · Portfolio CMS{% endblock %}
+{% block title %}{{ object.title }} · My Portfolio CMS{% endblock %}
 {% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / <a href="{% url 'project_list' %}" class="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Projects</a> / {{ object.title }}{% endblock %}
 {% block heading %}{{ object.title }}{% endblock %}
 
@@ -8,16 +8,16 @@
 <div class="mb-6 flex flex-wrap items-center gap-2">
   <a href="{% url 'project_update' object.pk %}" class="{{ primary_button_classes }} px-3 py-1.5 text-sm font-medium">Edit</a>
 
-  <form method="post" action="{% url 'project_toggle' object.pk 'published' %}">
+  <form method="post" action="{% url 'project_toggle' object.pk 'published' %}" data-loading-form>
     {% csrf_token %}
-    <button type="submit" class="{{ secondary_button_classes }} px-3 py-1.5 text-sm">
+    <button type="submit" data-loading-text="Updating…" class="{{ secondary_button_classes }} px-3 py-1.5 text-sm">
       {% if object.published %}Unpublish{% else %}Publish{% endif %}
     </button>
   </form>
 
-  <form method="post" action="{% url 'project_toggle' object.pk 'featured' %}">
+  <form method="post" action="{% url 'project_toggle' object.pk 'featured' %}" data-loading-form>
     {% csrf_token %}
-    <button type="submit" class="{{ secondary_button_classes }} px-3 py-1.5 text-sm">
+    <button type="submit" data-loading-text="Updating…" class="{{ secondary_button_classes }} px-3 py-1.5 text-sm">
       {% if object.featured %}Unfeature{% else %}Feature{% endif %}
     </button>
   </form>

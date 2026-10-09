@@ -1,6 +1,6 @@
 {% extends "dashboard/layout.html" %}
 
-{% block title %}Profile · Portfolio CMS{% endblock %}
+{% block title %}Profile · My Portfolio CMS{% endblock %}
 {% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Settings{% endblock %}
 {% block heading %}Profile{% endblock %}
 
@@ -24,7 +24,7 @@
       <h2 class="text-sm font-semibold">Profile details</h2>
       <p class="mt-1 text-xs text-neutral-500">Update the public information shown on your portfolio.</p>
     </div>
-    <form method="post" enctype="multipart/form-data" class="space-y-5 p-4 sm:p-6 {{ form_control_classes }}">
+    <form method="post" enctype="multipart/form-data" class="space-y-5 p-4 sm:p-6 {{ form_control_classes }}" data-loading-form>
       {% csrf_token %}
       {% for error in form.non_field_errors %}<p class="text-xs text-red-600">{{ error }}</p>{% endfor %}
       <div class="grid min-w-0 gap-5 sm:grid-cols-2">
@@ -47,7 +47,7 @@
         {% endfor %}
       </div>
       <div class="border-t border-neutral-200 pt-5">
-        <button type="submit" class="{{ primary_button_classes }} min-h-11 w-full px-4 py-2.5 text-base font-medium sm:w-auto sm:py-2 sm:text-sm">Save profile</button>
+        <button type="submit" data-loading-text="Saving…" class="{{ primary_button_classes }} min-h-11 w-full px-4 py-2.5 text-base font-medium sm:w-auto sm:py-2 sm:text-sm">Save profile</button>
       </div>
     </form>
   </section>

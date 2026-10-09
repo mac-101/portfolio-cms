@@ -1,7 +1,18 @@
+import uuid
 from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
+from pathlib import Path
 
+
+def project_image_path(instance, filename):
+    ext = Path(filename).suffix.lower()
+    return f"users/{instance.portfolio.owner_id}/projects/{uuid.uuid4().hex}{ext}"
+
+
+def profile_image_path(instance, filename):
+    ext = Path(filename).suffix.lower()
+    return f"users/{instance.owner_id}/profile/{uuid.uuid4().hex}{ext}"
 
 class Portfolio(models.Model):
     owner = models.OneToOneField(
@@ -10,7 +21,7 @@ class Portfolio(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=50, unique=True)
     bio = models.TextField(blank=True)
-    profile_image = models.ImageField(upload_to="profiles/", blank=True)
+    profile_image = models.ImageField(upload_to=profile_image_path, blank=True)
     location = models.CharField(max_length=100, blank=True)
     email = models.EmailField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -46,7 +57,7 @@ class Project(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(max_length=140, blank=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to="projects/", blank=True)
+    image = models.ImageField(upload_to=project_image_path, blank=True)
     tech_stack = models.ManyToManyField(TechStack, blank=True, related_name="projects")
     github_url = models.URLField(blank=True)
     live_url = models.URLField(blank=True)
