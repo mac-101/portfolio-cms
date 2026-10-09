@@ -48,7 +48,7 @@
 
       <div class="flex">
         <!-- sidebar -->
-        <div class="hidden w-44 shrink-0 border-r border-neutral-200 p-2 text-xs md:block">
+        <div class="hidden relative w-44 shrink-0 border-r border-neutral-200 p-2 text-xs md:block">
           <p class="rounded-md bg-neutral-100 px-3 py-1.5 font-medium">Dashboard</p>
           <p class="px-3 py-1.5 text-neutral-600">Projects</p>
           <p class="px-3 py-1.5 text-neutral-600">Tech Stack</p>
@@ -57,6 +57,11 @@
           <div class="my-2 border-t border-neutral-200"></div>
           <p class="px-3 py-1.5 text-neutral-600">API</p>
           <p class="px-3 py-1.5 text-neutral-600">Settings</p>
+          <div class="my-2 border-t border-neutral-200"></div>
+          <div class="absolute bottom-0 left-0 right-0">
+            <p class="px-3 py-1.5 text-neutral-600">Leave feedback</p>
+            <p class="px-3 py-1.5 text-neutral-600">Contact</p>
+          </div>
         </div>
 
         <!-- main -->
@@ -82,21 +87,27 @@
                 <li class="text-neutral-500">○ Add a social link</li>
               </ul>
             </div>
-            <div class="rounded-md border border-neutral-200">
-              <p class="border-b border-neutral-200 px-3 py-2 text-xs font-semibold">Recent projects</p>
-              <ul class="divide-y divide-neutral-200 text-xs">
+
+            <div class="rounded-md border border-neutral-200 p-3">
+                <span class="shrink-0 text-xs font-semibold">API endpoint</span>
+                <div class="flex"> 
+                    <code class="min-w-0 flex-1 truncate rounded bg-neutral-50 px-2 py-1 text-[11px]">https://your-domain.com/api/public/portfolios/sample/</code>
+                    <span class="shrink-0 rounded-md border border-neutral-300 px-2 py-1 text-[11px]">Copy</span>
+                </div>
+                <a href="/login/" class="mt-3 inline-block text-xs text-neutral-600 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">View API details</a>
+
+            </div>
+            
+          </div>
+
+            <div class="mt-3 flex flex-col  gap-2 rounded-md">
+              <p class="px-3 pt-2 text-xs font-semibold">Recent projects</p>
+              <ul class="divide-y gap-2 border  rounded-md border-neutral-200 divide-neutral-200 text-xs">
                 <li class="flex items-center justify-between px-3 py-2"><span>EchoNote</span><span class="text-neutral-500">Published</span></li>
                 <li class="flex items-center justify-between px-3 py-2"><span>KFARM Agro</span><span class="text-neutral-500">Published</span></li>
                 <li class="flex items-center justify-between px-3 py-2"><span>Learning Tracker</span><span class="text-neutral-500">Draft</span></li>
               </ul>
             </div>
-          </div>
-
-          <div class="mt-3 flex items-center gap-2 rounded-md border border-neutral-200 p-3">
-            <span class="shrink-0 text-xs font-semibold">API endpoint</span>
-            <code class="min-w-0 flex-1 truncate rounded bg-neutral-50 px-2 py-1 text-[11px]">https://your-domain.com/api/public/portfolios/sample/</code>
-            <span class="shrink-0 rounded-md border border-neutral-300 px-2 py-1 text-[11px]">Copy</span>
-          </div>
         </div>
       </div>
     </div>
