@@ -31,23 +31,24 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
-    "cloudinary",
-    "rest_framework",
-    "corsheaders",
-    "accounts",
-    "portfolio",
-    "api",
-    "landing",
-
+    'cloudinary_storage',
+    'cloudinary',
+    'rest_framework',
+    'corsheaders',
+    'accounts',
+    'portfolio',
+    'api',
+    'landing',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,8 +115,6 @@ if env("CLOUDINARY_API_KEY", default=""):
 else:
     DEFAULT_STORAGE = "django.core.files.storage.FileSystemStorage"
 
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STORAGES = {
     "default": {
