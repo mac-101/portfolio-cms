@@ -114,6 +114,8 @@ if env("CLOUDINARY_API_KEY", default=""):
 else:
     DEFAULT_STORAGE = "django.core.files.storage.FileSystemStorage"
 
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STORAGES = {
     "default": {"BACKEND": DEFAULT_STORAGE},
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
