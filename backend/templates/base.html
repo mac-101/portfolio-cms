@@ -6,6 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <title>{% block title %}My Portfolio CMS{% endblock %}</title>
+  <meta name="description" content="Manage your portfolio content in one place, then fetch it through an API and build your frontend your way.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My Portfolio CMS">
+  <meta property="og:title" content="My Portfolio CMS">
+  <meta property="og:description" content="Manage your portfolio content in one place, then fetch it through an API and build your frontend your way.">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  {% static 'images/portfolio-cms-share.svg' as share_image %}
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ share_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My Portfolio CMS">
+  <meta name="twitter:description" content="Manage your portfolio content in one place, then fetch it through an API and build your frontend your way.">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ share_image }}">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%BC%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
   <script src="https://cdn.tailwindcss.com"></script>
