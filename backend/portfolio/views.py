@@ -265,6 +265,10 @@ class ServiceCreate(ServiceMeta, SaveView, CreateView):
     form_class = ServiceForm
 
 
+class ServiceDetail(ServiceMeta, PortfolioMixin, DetailView):
+    template_name = "dashboard/service_detail.html"
+
+
 class ServiceUpdate(ServiceMeta, SaveView, UpdateView):
     form_class = ServiceForm
 

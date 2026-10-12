@@ -19,6 +19,7 @@ urlpatterns = [
 
     path("services/", views.service_list, name="service_list"),
     path("services/new/", views.ServiceCreate.as_view(), name="service_create"),
+    path("services/<int:pk>/", views.ServiceDetail.as_view(), name="service_detail"),
     path("services/<int:pk>/edit/", views.ServiceUpdate.as_view(), name="service_update"),
     path("services/<int:pk>/delete/", views.ServiceDelete.as_view(), name="service_delete"),
 
