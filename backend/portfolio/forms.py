@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
-from .models import Portfolio, Project, Service, SocialLink, TechStack
+from .models import Portfolio, Project, Service, SocialLink, Stack_Category, TechStack
 from .utils import RESERVED
 
 INPUT = (
@@ -91,10 +91,19 @@ class TechStackForm(SluggedFormMixin, PortfolioScopedForm):
 
     class Meta:
         model = TechStack
-        fields = ["name", "experience_level", "icon"]
+        fields = ["name", "category", "experience_level", "icon"]
         help_texts = {
             "experience_level": "Enter a value from 1 to 100, or leave blank if unknown."
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        category_field = self.fields["category"]
+        valid_categories = [value for value, _ in Stack_Category.CHOICE]
+        category_field.queryset = Stack_Category.objects.filter(
+            name__in=valid_categories
+        ).order_by("id")
+        category_field.empty_label = "Choose a category"
 
 
 class ServiceForm(PortfolioScopedForm):

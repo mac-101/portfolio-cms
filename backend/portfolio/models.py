@@ -15,11 +15,27 @@ def profile_image_path(instance, filename):
     ext = Path(filename).suffix.lower()
     return f"users/{instance.owner_id}/profile/{uuid.uuid4().hex}{ext}"
 
+class Stack_Category(models.Model):
+    CHOICE = (
+        ("frontend", "Frontend"),
+        ("backend", "Backend"),
+        ("database", "Database"),
+        ("devops", "DevOps"),
+        ("mobile", "Mobile"),
+        ("other", "Other"),
+    )
+    name = models.CharField(max_length=50, choices=CHOICE, unique=True)
+
+    def __str__(self):
+        return self.get_name_display()
+
+
 class Portfolio(models.Model):
     owner = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="portfolio"
     )
     name = models.CharField(max_length=100)
+    category = models.CharField(max_length=200, null=True)
     slug = models.SlugField(max_length=50, unique=True)
     bio = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to=profile_image_path, blank=True)
@@ -35,6 +51,7 @@ class Portfolio(models.Model):
 class TechStack(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="tech_stack")
     name = models.CharField(max_length=60)
+    category = models.ForeignKey(Stack_Category, on_delete=models.SET_NULL, null=True, blank=True, related_name="tech_stacks")
     experience_level = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(100)],
         default=1,
