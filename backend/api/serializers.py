@@ -21,7 +21,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class TechStackSerializer(serializers.ModelSerializer):
     class Meta:
         model = TechStack
-        fields = ["name", "slug", "icon"]
+        fields = ["name", "slug", "icon", "experience_level"]
 
 
 class ServiceSerializer(serializers.ModelSerializer):

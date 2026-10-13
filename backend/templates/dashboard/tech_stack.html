@@ -9,7 +9,10 @@
 <div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
   {% for item in items %}
   <div class="flex flex-col gap-3 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-    <span class="min-w-0 break-words font-medium">{{ item.name }}</span>
+    <div class="min-w-0">
+      <p class="break-words font-medium">{{ item.name }}</p>
+      {% if item.experience_level %}<p class="mt-1 text-xs text-neutral-500">Experience level: {{ item.experience_level }}/100</p>{% endif %}
+    </div>
     <span class="flex items-center gap-4 text-xs sm:shrink-0">
       <a href="{% url 'tech_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Edit</a>
       <a href="{% url 'tech_delete' item.pk %}" class="{{ destructive_link_classes }}">Delete</a>

@@ -60,7 +60,7 @@
       <h2 class="mb-3 text-sm font-semibold">Tech stack</h2>
       <div class="flex flex-wrap gap-1.5">
         {% for tech in object.tech_stack.all %}
-        <span class="rounded-md bg-neutral-100 px-2 py-1 text-xs">{{ tech.name }}</span>
+        <span class="rounded-md bg-neutral-100 px-2 py-1 text-xs">{{ tech.name }}{% if tech.experience_level %} · {{ tech.experience_level }}%{% endif %}</span>
         {% empty %}
         <p class="text-xs text-neutral-500">None added. <a href="{% url 'project_update' object.pk %}" class="underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Edit project</a></p>
         {% endfor %}

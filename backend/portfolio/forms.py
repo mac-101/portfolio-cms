@@ -91,7 +91,10 @@ class TechStackForm(SluggedFormMixin, PortfolioScopedForm):
 
     class Meta:
         model = TechStack
-        fields = ["name", "icon"]
+        fields = ["name", "experience_level", "icon"]
+        help_texts = {
+            "experience_level": "Enter a value from 1 to 100, or leave blank if unknown."
+        }
 
 
 class ServiceForm(PortfolioScopedForm):

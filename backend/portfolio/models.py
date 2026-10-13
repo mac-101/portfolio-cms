@@ -1,5 +1,6 @@
 import uuid
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 from pathlib import Path
@@ -34,6 +35,12 @@ class Portfolio(models.Model):
 class TechStack(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="tech_stack")
     name = models.CharField(max_length=60)
+    experience_level = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+        default=1,
+        blank=True,
+        null=True,
+    )
     slug = models.SlugField(max_length=70, blank=True)
     icon = models.CharField(max_length=100, blank=True)
 

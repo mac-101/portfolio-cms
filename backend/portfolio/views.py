@@ -142,7 +142,12 @@ def build_endpoints(base, portfolio):
             "title": "Tech stack",
             "path": "tech-stack/",
             "description": "Your technologies, sorted by name.",
-            "example": listing({"name": "Django", "slug": "django", "icon": ""}),
+            "example": listing({
+                "name": "Django",
+                "slug": "django",
+                "icon": "",
+                "experience_level": 75,
+            }),
         },
         {
             "title": "Services",
