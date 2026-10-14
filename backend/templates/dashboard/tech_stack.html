@@ -9,13 +9,9 @@
 <div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
   {% for item in items %}
   <div class="flex flex-col gap-3 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-    <div class="flex items-center gap-3">
-      {% if item.icon %}
-      <img src="{{ item.icon.url }}" alt="Icon for {{ item.name }}" class="h-8 w-8 rounded-md border border-neutral-200 object-cover">
-      {% else %}
-      <div class="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-neutral-100 text-xs text-neutral-500">No icon</div>
-      {% endif %}
-    </div>
+    <span class="flex items-center gap-2 font-medium">
+      {% if item.icon_url %}<img src="{{ item.icon_url }}" alt="" class="h-5 w-5">{% endif %}{{ item.name }}
+    </span>
     <div class="min-w-0">
       <p class="break-words font-medium">{{ item.name }}</p>
       {% if item.category %}<p class="mt-1 text-xs text-neutral-500">Category: {{ item.category.name }}</p>{% endif %}

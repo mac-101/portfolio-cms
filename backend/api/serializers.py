@@ -23,7 +23,7 @@ class TechStackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TechStack
-        fields = ["name", "slug", "icon", "experience_level", "category"]
+        fields = ["name", "slug", "icon", "experience_level", "category", "icon_url"]
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Service
-        fields = ["title", "description", "icon"]
+        fields = ["title", "description", "icon", "icon_url"]
 
 
 class SocialLinkSerializer(serializers.ModelSerializer):

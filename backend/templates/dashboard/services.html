@@ -9,9 +9,17 @@
 <div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
   {% for item in items %}
   <div class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-    <div class="min-w-0">
-      <p class="break-words text-sm font-medium"><a href="{% url 'service_detail' item.pk %}" class="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ item.title }}</a></p>
-      {% if item.description %}<p class="mt-1 break-words text-xs text-neutral-500">{{ item.description }}</p>{% endif %}
+    <div class="min-w-0 flex gap-3 items-start">
+      {% if item.icon_url %}
+      <span class="flex items-center gap-2 font-medium">
+        <img src="{{ item.icon_url }}" alt="" class="h-5 w-5">
+      </span>
+      {% endif %}
+      <div>
+        <p class="break-words text-sm font-medium"><a href="{% url 'service_detail' item.pk %}" class="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ item.title }}</a></p>
+        {% if item.description %}<p class="mt-1 break-words text-xs text-neutral-500">{{ item.description }}</p>{% endif %}
+      </div>
+  
     </div>
     <span class="flex items-center gap-4 text-xs sm:shrink-0">
       <a href="{% url 'service_detail' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">View</a>
