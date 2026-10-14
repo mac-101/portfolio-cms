@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
-
+from .icons import SERVICE_ICON_BASE, SERVICE_ICONS, TECH_ICON_BASE, TECH_ICONS
 from .models import Portfolio, Project, Service, SocialLink, Stack_Category, TechStack
 from .utils import RESERVED
 
@@ -36,6 +36,8 @@ def style_fields(form):
             widget.attrs["class"] = "space-y-1.5 rounded-md border border-neutral-200 p-3 text-sm"
         elif isinstance(widget, (forms.CheckboxInput, forms.ClearableFileInput)):
             continue
+        elif isinstance(widget, forms.RadioSelect):
+            widget.attrs["class"] = "peer sr-only"
         else:
             widget.attrs["class"] = INPUT
 
@@ -88,7 +90,14 @@ class ProjectForm(SluggedFormMixin, PortfolioScopedForm):
 
 class TechStackForm(SluggedFormMixin, PortfolioScopedForm):
     slug_source = "name"
-
+    icon_base = TECH_ICON_BASE
+    icon = forms.ChoiceField(
+        choices=[("", "None")] + TECH_ICONS,
+        required=False,
+        widget=forms.RadioSelect,
+        help_text="Leave on None and we'll try to match the name.",
+    )
+    
     class Meta:
         model = TechStack
         fields = ["name", "category", "experience_level", "icon"]
@@ -107,6 +116,12 @@ class TechStackForm(SluggedFormMixin, PortfolioScopedForm):
 
 
 class ServiceForm(PortfolioScopedForm):
+    icon_base = SERVICE_ICON_BASE
+    icon = forms.ChoiceField(
+        choices=[("", "None")] + SERVICE_ICONS,
+        required=False,
+        widget=forms.RadioSelect,
+    )
     class Meta:
         model = Service
         fields = ["title", "description", "icon"]

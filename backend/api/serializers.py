@@ -19,12 +19,16 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class TechStackSerializer(serializers.ModelSerializer):
+    icon_url = serializers.ReadOnlyField()
+
     class Meta:
         model = TechStack
         fields = ["name", "slug", "icon", "experience_level", "category"]
 
 
 class ServiceSerializer(serializers.ModelSerializer):
+    icon_url = serializers.ReadOnlyField()
+
     class Meta:
         model = Service
         fields = ["title", "description", "icon"]

@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 from pathlib import Path
+from .icons import SERVICE_ICON_BASE, TECH_ICON_BASE, guess_tech_icon
 
 
 def project_image_path(instance, filename):
@@ -66,10 +67,16 @@ class TechStack(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["portfolio", "slug"], name="unique_tech_slug_per_portfolio")
         ]
+        
+    @property
+    def icon_url(self):
+        return f"{TECH_ICON_BASE}{self.icon}.svg" if self.icon else ""
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+        if self._state.adding and not self.icon:      # only when first created
+            self.icon = guess_tech_icon(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -110,7 +117,12 @@ class Service(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     icon = models.CharField(max_length=100, blank=True)
+    tech_stack = models.ManyToManyField(TechStack, blank=True, related_name="services")
 
+    @property
+    def icon_url(self):
+        return f"{SERVICE_ICON_BASE}{self.icon}.svg" if self.icon else ""
+    
     def __str__(self):
         return self.title
 

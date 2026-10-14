@@ -10,19 +10,35 @@
   {% for error in form.non_field_errors %}<p class="text-xs text-red-600">{{ error }}</p>{% endfor %}
 
   {% for field in form %}
-  <div>
-    {% if field.widget_type == "checkbox" %}
-      <label class="flex items-center gap-2 text-sm font-medium">{{ field }} {{ field.label }}</label>
-    {% else %}
-      <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
-      {{ field }}
-    {% endif %}
-    {% if field.name == "image" and object and object.image %}
-    <img src="{{ object.image.url }}" alt="Current image for {{ object }}" class="mt-3 h-20 w-20 rounded-md border border-neutral-200 object-cover">
-    {% endif %}
-    {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
-    {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
-  </div>
+    <div>
+      {% if field.name == "icon" and form.icon_base %}
+        <fieldset>
+          <legend class="mb-2 block text-sm font-medium">{{ field.label }}</legend>
+          <div class="grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+            {% for radio in field %}
+            <label class="cursor-pointer">
+              {{ radio.tag }}
+              <span class="flex h-16 flex-col items-center justify-center gap-1 rounded-md border border-neutral-200 text-[10px] text-neutral-600 hover:bg-neutral-50 peer-checked:border-neutral-900 peer-checked:text-neutral-900 peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-900">
+                {% if radio.data.value %}
+                  <img src="{{ form.icon_base }}{{ radio.data.value }}.svg" alt="" class="h-6 w-6" loading="lazy">
+                {% else %}
+                  <span class="text-sm">None</span>
+                {% endif %}
+                {% if radio.data.value %}<span class="max-w-full truncate px-1">{{ radio.choice_label }}</span>{% endif %}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% elif field.widget_type == "checkbox" %}
+        <label class="flex items-center gap-2 text-sm font-medium">{{ field }} {{ field.label }}</label>
+      {% else %}
+        <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
+        {{ field }}
+      {% endif %}
+      {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
   {% endfor %}
 
   <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
