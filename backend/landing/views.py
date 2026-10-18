@@ -7,6 +7,10 @@ from django.shortcuts import redirect, render
 from .forms import PUBLIC_CATEGORIES, ContactForm, FeedbackForm
 from .models import Feedback
 
+from django.http import Http404
+
+from .docs import DOC_SECTIONS, ORDER, TITLES, render_page
+
 
 def too_many_submissions(request, limit=5, window=3600):
     """Allow 5 anonymous feedback posts per IP per hour."""
@@ -90,4 +94,26 @@ def dashboard_contact(request):
         "form": form,
         "contact_email": settings.CONTACT_EMAIL,
         "contact_github": settings.CONTACT_GITHUB,
+    })
+    
+def docs_index(request):
+    return redirect("docs_page", slug="introduction")
+
+
+def docs_page(request, slug):
+    html = render_page(slug)
+    if html is None:
+        raise Http404
+
+    index = ORDER.index(slug)
+    prev_page = (ORDER[index - 1], TITLES[ORDER[index - 1]]) if index > 0 else None
+    next_page = (ORDER[index + 1], TITLES[ORDER[index + 1]]) if index < len(ORDER) - 1 else None
+
+    return render(request, "landing/docs.html", {
+        "html": html,
+        "slug": slug,
+        "title": TITLES[slug],
+        "sections": DOC_SECTIONS,
+        "prev_page": prev_page,
+        "next_page": next_page,
     })

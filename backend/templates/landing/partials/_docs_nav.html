@@ -1,0 +1,14 @@
+{% for heading, pages in sections %}
+<div class="mb-5">
+  <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">{{ heading }}</p>
+  <ul class="space-y-0.5">
+    {% for page_slug, page_title in pages %}
+    <li>
+      <a href="{% url 'docs_page' page_slug %}"
+         {% if page_slug == slug %}aria-current="page"{% endif %}
+         class="block rounded-md px-3 py-1.5 text-sm {% if page_slug == slug %}bg-neutral-100 font-medium text-neutral-900{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %} dark:hover:bg-neutral-800">{{ page_title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}

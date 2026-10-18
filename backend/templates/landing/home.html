@@ -7,126 +7,126 @@
 <!-- 1. Hero (centered) -->
 <section class="mx-auto max-w-6xl px-4 pb-10 pt-16 text-center sm:px-6 sm:pb-14 sm:pt-24">
   <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
-    <span class="text-neutral-600">A My Portfolio CMS built for developers</span>
-    <span class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-2 py-0.5 text-neutral-600">
+    <span class="text-neutral-600 dark:text-neutral-400">A My Portfolio CMS built for developers</span>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-2 py-0.5 text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
       <span class="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>MVP in development
     </span>
   </div>
   <h1 class="mx-auto mt-5 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">Manage your portfolio. Build the frontend your way.</h1>
-  <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-neutral-600 sm:text-lg">Keep your projects, tech stack, services, and links in one place. Fetch your content through an API and render it with React, Next.js, Astro, plain HTML, or whatever you prefer.</p>
+  <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-400">Keep your projects, tech stack, services, and links in one place. Fetch your content through an API and render it with React, Next.js, Astro, plain HTML, or whatever you prefer.</p>
   <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
     {% if user.is_authenticated %}
     <a href="{% url 'dashboard_home' %}"
-       class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto">Open dashboard</a>
+       class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-100 dark:focus-visible:ring-offset-neutral-950">Open dashboard</a>
     {% else %}
     <a href="{% url 'signup' %}"
-       class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto">Create an account</a>
+       class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-100 dark:focus-visible:ring-offset-neutral-950">Create an account</a>
     {% endif %}
     <a href="#how-it-works"
-       class="inline-flex w-full items-center justify-center rounded-md border border-neutral-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto">Explore how it works</a>
+       class="inline-flex w-full items-center justify-center rounded-md border border-neutral-300 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none sm:w-auto dark:border-neutral-700 dark:hover:bg-neutral-800">Explore how it works</a>
   </div>
 </section>
 
 <!-- 2. Dashboard showcase -->
 <section class="px-4 pb-16 sm:px-6 sm:pb-24">
   <figure class="mx-auto max-w-5xl">
-    <div aria-hidden="true" class="overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm">
+    <div aria-hidden="true" class="overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
 
       <!-- browser bar -->
-      <div class="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-50 px-3 py-2">
+      <div class="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-50 px-3 py-2 dark:border-neutral-800 dark:bg-neutral-900">
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-300"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-300"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-300"></span>
-        <span class="mx-auto min-w-0 truncate rounded border border-neutral-200 bg-white px-3 py-0.5 font-mono text-[11px] text-neutral-500">your-domain.com/dashboard/</span>
+        <span class="mx-auto min-w-0 truncate rounded border border-neutral-200 bg-white px-3 py-0.5 font-mono text-[11px] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">your-domain.com/dashboard/</span>
       </div>
 
       <!-- app header -->
-      <div class="flex h-10 items-center justify-between border-b border-neutral-200 px-4 text-xs">
+      <div class="flex h-10 items-center justify-between border-b border-neutral-200 px-4 text-xs dark:border-neutral-800">
         <span class="font-semibold tracking-tight">My Portfolio CMS</span>
-        <span class="text-neutral-500">your-name · Log out</span>
+        <span class="text-neutral-500 dark:text-neutral-400">your-name · Log out</span>
       </div>
 
       <div class="flex">
         <!-- sidebar -->
-        <div class="hidden relative w-44 shrink-0 border-r border-neutral-200 p-2 text-xs md:block">
-          <p class="rounded-md bg-neutral-100 px-3 py-1.5 font-medium">Dashboard</p>
-          <p class="px-3 py-1.5 text-neutral-600">Projects</p>
-          <p class="px-3 py-1.5 text-neutral-600">Tech Stack</p>
-          <p class="px-3 py-1.5 text-neutral-600">Services</p>
-          <p class="px-3 py-1.5 text-neutral-600">Socials</p>
-          <div class="my-2 border-t border-neutral-200"></div>
-          <p class="px-3 py-1.5 text-neutral-600">API</p>
-          <p class="px-3 py-1.5 text-neutral-600">Settings</p>
-          <div class="my-2 border-t border-neutral-200"></div>
+        <div class="hidden relative w-44 shrink-0 border-r border-neutral-200 p-2 text-xs md:block dark:border-neutral-800">
+          <p class="rounded-md bg-neutral-100 px-3 py-1.5 font-medium dark:bg-neutral-800">Dashboard</p>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Projects</p>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Tech Stack</p>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Services</p>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Socials</p>
+          <div class="my-2 border-t border-neutral-200 dark:border-neutral-800"></div>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">API</p>
+          <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Settings</p>
+          <div class="my-2 border-t border-neutral-200 dark:border-neutral-800"></div>
           <div class="absolute bottom-0 left-0 right-0">
-            <p class="px-3 py-1.5 text-neutral-600">Leave feedback</p>
-            <p class="px-3 py-1.5 text-neutral-600">Contact</p>
+            <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Leave feedback</p>
+            <p class="px-3 py-1.5 text-neutral-600 dark:text-neutral-400">Contact</p>
           </div>
         </div>
 
         <!-- main -->
         <div class="min-w-0 flex-1 p-4 text-left sm:p-6">
-          <p class="text-[10px] text-neutral-500">Dashboard</p>
+          <p class="text-[10px] text-neutral-500 dark:text-neutral-400">Dashboard</p>
           <p class="mb-4 text-base font-semibold tracking-tight">Sample Portfolio</p>
 
           <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div class="rounded-md border border-neutral-200 p-3"><p class="text-[10px] text-neutral-500">Projects</p><p class="mt-1 text-xl font-semibold">6</p></div>
-            <div class="rounded-md border border-neutral-200 p-3"><p class="text-[10px] text-neutral-500">Tech Stack</p><p class="mt-1 text-xl font-semibold">12</p></div>
-            <div class="rounded-md border border-neutral-200 p-3"><p class="text-[10px] text-neutral-500">Services</p><p class="mt-1 text-xl font-semibold">3</p></div>
-            <div class="rounded-md border border-neutral-200 p-3"><p class="text-[10px] text-neutral-500">Social Links</p><p class="mt-1 text-xl font-semibold">4</p></div>
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800"><p class="text-[10px] text-neutral-500 dark:text-neutral-400">Projects</p><p class="mt-1 text-xl font-semibold">6</p></div>
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800"><p class="text-[10px] text-neutral-500 dark:text-neutral-400">Tech Stack</p><p class="mt-1 text-xl font-semibold">12</p></div>
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800"><p class="text-[10px] text-neutral-500 dark:text-neutral-400">Services</p><p class="mt-1 text-xl font-semibold">3</p></div>
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800"><p class="text-[10px] text-neutral-500 dark:text-neutral-400">Social Links</p><p class="mt-1 text-xl font-semibold">4</p></div>
           </div>
 
           <div class="mt-4 grid gap-3 md:grid-cols-2">
-            <div class="rounded-md border border-neutral-200 p-3">
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800">
               <p class="mb-2 text-xs font-semibold">Portfolio readiness · 4/5</p>
               <ul class="space-y-1 text-xs">
                 <li>✓ Add a bio</li>
                 <li>✓ Publish a project</li>
                 <li>✓ Add your tech stack</li>
                 <li>✓ Add a service</li>
-                <li class="text-neutral-500">○ Add a social link</li>
+                <li class="text-neutral-500 dark:text-neutral-400">○ Add a social link</li>
               </ul>
             </div>
 
-            <div class="rounded-md border border-neutral-200 p-3">
+            <div class="rounded-md border border-neutral-200 p-3 dark:border-neutral-800">
                 <span class="shrink-0 text-xs font-semibold">API endpoint</span>
                 <div class="flex"> 
-                    <code class="min-w-0 flex-1 truncate rounded bg-neutral-50 px-2 py-1 text-[11px]">https://your-domain.com/api/public/portfolios/sample/</code>
-                    <span class="shrink-0 rounded-md border border-neutral-300 px-2 py-1 text-[11px]">Copy</span>
+                    <code class="min-w-0 flex-1 truncate rounded bg-neutral-50 px-2 py-1 text-[11px] dark:bg-neutral-900">https://your-domain.com/api/public/portfolios/sample/</code>
+                    <span class="shrink-0 rounded-md border border-neutral-300 px-2 py-1 text-[11px] dark:border-neutral-700">Copy</span>
                 </div>
-                <a href="/login/" class="mt-3 inline-block text-xs text-neutral-600 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">View API details</a>
+                <a href="/login/" class="mt-3 inline-block text-xs text-neutral-600 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:text-neutral-400">View API details</a>
 
             </div>
             
           </div>
 
-            <div class="mt-3 flex flex-col  gap-2 rounded-md">
+            <div class="mt-3 flex flex-col gap-2 rounded-md">
               <p class="px-3 pt-2 text-xs font-semibold">Recent projects</p>
-              <ul class="divide-y gap-2 border  rounded-md border-neutral-200 divide-neutral-200 text-xs">
-                <li class="flex items-center justify-between px-3 py-2"><span>EchoNote</span><span class="text-neutral-500">Published</span></li>
-                <li class="flex items-center justify-between px-3 py-2"><span>KFARM Agro</span><span class="text-neutral-500">Published</span></li>
-                <li class="flex items-center justify-between px-3 py-2"><span>Learning Tracker</span><span class="text-neutral-500">Draft</span></li>
+              <ul class="divide-y gap-2 border rounded-md border-neutral-200 divide-neutral-200 text-xs dark:border-neutral-800">
+                <li class="flex items-center justify-between px-3 py-2"><span>EchoNote</span><span class="text-neutral-500 dark:text-neutral-400">Published</span></li>
+                <li class="flex items-center justify-between px-3 py-2"><span>KFARM Agro</span><span class="text-neutral-500 dark:text-neutral-400">Published</span></li>
+                <li class="flex items-center justify-between px-3 py-2"><span>Learning Tracker</span><span class="text-neutral-500 dark:text-neutral-400">Draft</span></li>
               </ul>
             </div>
         </div>
       </div>
     </div>
-    <figcaption class="mt-3 text-center text-xs text-neutral-500">Illustrative sample of the dashboard. Not real data.</figcaption>
+    <figcaption class="mt-3 text-center text-xs text-neutral-500 dark:text-neutral-400">Illustrative sample of the dashboard. Not real data.</figcaption>
   </figure>
 </section>
 
 <!-- 3. Problem -->
-<section class="border-t border-neutral-200">
+<section class="border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20">
     <h2 class="mx-auto max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">Your portfolio shouldn't live inside your codebase.</h2>
-    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-600">Projects change. Your skills grow. Your links get updated. But when portfolio content is hard-coded into your frontend, even a small update can mean another code change and deployment.</p>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Projects change. Your skills grow. Your links get updated. But when portfolio content is hard-coded into your frontend, even a small update can mean another code change and deployment.</p>
     <div class="mx-auto mt-10 grid max-w-3xl gap-4 text-left md:grid-cols-2">
-      <div class="rounded-md border border-neutral-200 p-5">
-        <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Hard-coded content</p>
+      <div class="rounded-md border border-neutral-200 p-5 dark:border-neutral-800">
+        <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Hard-coded content</p>
         <p class="mt-3 font-mono text-sm">Edit code → Commit → Deploy</p>
       </div>
       <div class="rounded-md border border-neutral-900 p-5">
-        <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">CMS-managed content</p>
+        <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">CMS-managed content</p>
         <p class="mt-3 font-mono text-sm">Update content → Fetch through API</p>
       </div>
     </div>
@@ -134,37 +134,37 @@
 </section>
 
 <!-- 4. Solution flow -->
-<section class="border-t border-neutral-200 bg-neutral-50">
+<section class="border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
   <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20">
     <h2 class="mx-auto max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">Separate your content from your frontend.</h2>
-    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-600">Manage the information in your dashboard. Your frontend decides how to display it.</p>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Manage the information in your dashboard. Your frontend decides how to display it.</p>
 
     <ol class="mt-10 flex flex-col items-stretch gap-2 text-left md:flex-row md:items-center">
-      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4"><p class="text-xs text-neutral-500">Manage</p><p class="mt-1 text-sm font-medium">CMS dashboard</p></li>
+      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900"><p class="text-xs text-neutral-500 dark:text-neutral-400">Manage</p><p class="mt-1 text-sm font-medium">CMS dashboard</p></li>
       <li aria-hidden="true" class="text-center text-neutral-400"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></li>
-      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4"><p class="text-xs text-neutral-500">Store</p><p class="mt-1 text-sm font-medium">Portfolio content</p></li>
+      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900"><p class="text-xs text-neutral-500 dark:text-neutral-400">Store</p><p class="mt-1 text-sm font-medium">Portfolio content</p></li>
       <li aria-hidden="true" class="text-center text-neutral-400"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></li>
-      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4"><p class="text-xs text-neutral-500">Expose</p><p class="mt-1 text-sm font-medium">Public REST API</p></li>
+      <li class="flex-1 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900"><p class="text-xs text-neutral-500 dark:text-neutral-400">Expose</p><p class="mt-1 text-sm font-medium">Public REST API</p></li>
       <li aria-hidden="true" class="text-center text-neutral-400"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></li>
-      <li class="flex-1 rounded-md border border-neutral-900 bg-white p-4"><p class="text-xs text-neutral-500">Build with</p><p class="mt-1 text-sm font-medium">React · Next.js · Astro · HTML</p></li>
+      <li class="flex-1 rounded-md border border-neutral-900 bg-white p-4 dark:bg-neutral-900"><p class="text-xs text-neutral-500 dark:text-neutral-400">Build with</p><p class="mt-1 text-sm font-medium">React · Next.js · Astro · HTML</p></li>
     </ol>
   </div>
 </section>
 
 <!-- 5. Feature row: Projects (text left, terminal right) -->
-<section class="border-t border-neutral-200">
+<section class="border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div>
-      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Projects</p>
+      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Projects</p>
       <h2 class="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Add projects without touching your frontend code.</h2>
-      <p class="mt-4 text-base leading-relaxed text-neutral-600">Descriptions, images, technologies, and links, all managed from your dashboard. Your frontend just asks for the latest.</p>
+      <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Descriptions, images, technologies, and links, all managed from your dashboard. Your frontend just asks for the latest.</p>
     </div>
     <div class="min-w-0 overflow-hidden rounded-md border border-neutral-800 bg-neutral-900">
       <div class="flex items-center gap-1.5 border-b border-neutral-800 bg-neutral-800 px-3 py-2">
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span>
         <span class="ml-2 font-mono text-xs text-neutral-400">projects</span>
       </div>
-      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500">$</span> curl "https://your-domain.com/api/public/portfolios/your-slug/projects/?featured=true"
+      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500 dark:text-neutral-400">$</span> curl "https://your-domain.com/api/public/portfolios/your-slug/projects/?featured=true"
 
 {
   "count": 1,
@@ -186,26 +186,26 @@
 </section>
 
 <!-- 6. Feature row: Publishing (terminal LEFT, text right) -->
-<section class="border-t border-neutral-200 bg-neutral-50">
+<section class="border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
   <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div class="lg:order-2">
-      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Publishing</p>
+      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Publishing</p>
       <h2 class="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Publish when you're ready.</h2>
-      <p class="mt-4 text-base leading-relaxed text-neutral-600">Drafts stay private. Only published projects are returned by the API, so work in progress never leaks into your live portfolio.</p>
+      <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Drafts stay private. Only published projects are returned by the API, so work in progress never leaks into your live portfolio.</p>
     </div>
     <div class="min-w-0 overflow-hidden rounded-md border border-neutral-800 bg-neutral-900 lg:order-1">
       <div class="flex items-center gap-1.5 border-b border-neutral-800 bg-neutral-800 px-3 py-2">
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span>
         <span class="ml-2 font-mono text-xs text-neutral-400">publishing</span>
       </div>
-      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500">$</span> export API=https://your-domain.com/api/public/portfolios/your-slug
+      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500 dark:text-neutral-400">$</span> export API=https://your-domain.com/api/public/portfolios/your-slug
 
-<span class="text-neutral-500"># published project</span>
-<span class="text-neutral-500">$</span> curl -i $API/projects/echonote/
+<span class="text-neutral-500 dark:text-neutral-400"># published project</span>
+<span class="text-neutral-500 dark:text-neutral-400">$</span> curl -i $API/projects/echonote/
 HTTP/1.1 <span class="text-emerald-400">200 OK</span>
 
-<span class="text-neutral-500"># draft project</span>
-<span class="text-neutral-500">$</span> curl -i $API/projects/work-in-progress/
+<span class="text-neutral-500 dark:text-neutral-400"># draft project</span>
+<span class="text-neutral-500 dark:text-neutral-400">$</span> curl -i $API/projects/work-in-progress/
 HTTP/1.1 <span class="text-red-400">404 Not Found</span>
 { "detail": "Not found." }</pre>
     </div>
@@ -213,23 +213,23 @@ HTTP/1.1 <span class="text-red-400">404 Not Found</span>
 </section>
 
 <!-- 7. Feature row: Stack, services, links (text left, terminal right) -->
-<section class="border-t border-neutral-200">
+<section class="border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div>
-      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Stack, services and links</p>
+      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Stack, services and links</p>
       <h2 class="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Everything else your portfolio needs.</h2>
       <dl class="mt-6 space-y-4 text-sm">
         <div>
-          <dt class="flex items-baseline gap-2"><span class="font-semibold">Tech stack</span><span class="font-mono text-xs text-neutral-500">tech-stack/</span></dt>
-          <dd class="mt-0.5 text-neutral-600">Keep the technologies you use up to date.</dd>
+          <dt class="flex items-baseline gap-2"><span class="font-semibold">Tech stack</span><span class="font-mono text-xs text-neutral-500 dark:text-neutral-400">tech-stack/</span></dt>
+          <dd class="mt-0.5 text-neutral-600 dark:text-neutral-400">Keep the technologies you use up to date.</dd>
         </div>
         <div>
-          <dt class="flex items-baseline gap-2"><span class="font-semibold">Services</span><span class="font-mono text-xs text-neutral-500">services/</span></dt>
-          <dd class="mt-0.5 text-neutral-600">Show developers and clients what you can build.</dd>
+          <dt class="flex items-baseline gap-2"><span class="font-semibold">Services</span><span class="font-mono text-xs text-neutral-500 dark:text-neutral-400">services/</span></dt>
+          <dd class="mt-0.5 text-neutral-600 dark:text-neutral-400">Show developers and clients what you can build.</dd>
         </div>
         <div>
-          <dt class="flex items-baseline gap-2"><span class="font-semibold">Social links</span><span class="font-mono text-xs text-neutral-500">socials/</span></dt>
-          <dd class="mt-0.5 text-neutral-600">Keep your important links in one place.</dd>
+          <dt class="flex items-baseline gap-2"><span class="font-semibold">Social links</span><span class="font-mono text-xs text-neutral-500 dark:text-neutral-400">socials/</span></dt>
+          <dd class="mt-0.5 text-neutral-600 dark:text-neutral-400">Keep your important links in one place.</dd>
         </div>
       </dl>
     </div>
@@ -238,7 +238,7 @@ HTTP/1.1 <span class="text-red-400">404 Not Found</span>
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span>
         <span class="ml-2 font-mono text-xs text-neutral-400">tech-stack</span>
       </div>
-      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500">$</span> curl $API/tech-stack/
+      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500 dark:text-neutral-400">$</span> curl $API/tech-stack/
 
 {
   "count": 3,
@@ -253,20 +253,20 @@ HTTP/1.1 <span class="text-red-400">404 Not Found</span>
 </section>
 
 <!-- 8. Feature row: Public API (text left, terminal right) -->
-<section id="api" class="scroll-mt-16 border-t border-neutral-200 bg-neutral-50">
+<section id="api" class="scroll-mt-16 border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
   <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div>
-      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500">Public API</p>
+      <p class="text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Public API</p>
       <h2 class="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Fetch the data. Render it your way.</h2>
-      <p class="mt-4 text-base leading-relaxed text-neutral-600">Every portfolio gets a read-only JSON API with no API key. Use React, Next.js, Astro, plain HTML, or whatever you prefer.</p>
-      <p class="mt-3 text-sm text-neutral-500">The URL is a placeholder. Your own address appears in your dashboard.</p>
+      <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Every portfolio gets a read-only JSON API with no API key. Use React, Next.js, Astro, plain HTML, or whatever you prefer.</p>
+      <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">The URL is a placeholder. Your own address appears in your dashboard.</p>
     </div>
     <div class="min-w-0 overflow-hidden rounded-md border border-neutral-800 bg-neutral-900">
       <div class="flex items-center gap-1.5 border-b border-neutral-800 bg-neutral-800 px-3 py-2">
         <span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-600"></span>
         <span class="ml-2 font-mono text-xs text-neutral-400">portfolio.js</span>
       </div>
-      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500">// fetch your published projects</span>
+      <pre tabindex="0" class="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-neutral-100"><span class="text-neutral-500 dark:text-neutral-400">// fetch your published projects</span>
 const res = await fetch(
   "https://your-domain.com/api/public/portfolios/your-slug/projects/"
 );
@@ -280,63 +280,63 @@ data.results.forEach((project) => {
 </section>
 
 <!-- 9. How it works -->
-<section id="how-it-works" class="scroll-mt-16 border-t border-neutral-200">
+<section id="how-it-works" class="scroll-mt-16 border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
     <h2 class="text-center text-2xl font-semibold tracking-tight sm:text-3xl">How it works</h2>
     <ol class="mt-10 grid gap-4 md:grid-cols-3">
-      <li class="rounded-md border border-neutral-200 p-5">
-        <p class="font-mono text-xs text-neutral-500">01</p>
+      <li class="rounded-md border border-neutral-200 p-5 dark:border-neutral-800">
+        <p class="font-mono text-xs text-neutral-500 dark:text-neutral-400">01</p>
         <h3 class="mt-2 text-sm font-semibold">Add</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">Enter your content in the dashboard.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Enter your content in the dashboard.</p>
       </li>
-      <li class="rounded-md border border-neutral-200 p-5">
-        <p class="font-mono text-xs text-neutral-500">02</p>
+      <li class="rounded-md border border-neutral-200 p-5 dark:border-neutral-800">
+        <p class="font-mono text-xs text-neutral-500 dark:text-neutral-400">02</p>
         <h3 class="mt-2 text-sm font-semibold">Publish</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">Choose what should be public.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Choose what should be public.</p>
       </li>
-      <li class="rounded-md border border-neutral-200 p-5">
-        <p class="font-mono text-xs text-neutral-500">03</p>
+      <li class="rounded-md border border-neutral-200 p-5 dark:border-neutral-800">
+        <p class="font-mono text-xs text-neutral-500 dark:text-neutral-400">03</p>
         <h3 class="mt-2 text-sm font-semibold">Fetch</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">Request published content from your own frontend.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Request published content from your own frontend.</p>
       </li>
     </ol>
-    <p class="mt-8 text-center text-sm text-neutral-500">Built for frontend, backend and full-stack developers, students, and freelancers who want control over their own portfolio frontend.</p>
+    <p class="mt-8 text-center text-sm text-neutral-500 dark:text-neutral-400">Built for frontend, backend and full-stack developers, students, and freelancers who want control over their own portfolio frontend.</p>
   </div>
 </section>
 
 <!-- 10. V2 preview -->
-<section class="border-t border-neutral-200 bg-neutral-50">
+<section class="border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
   <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div>
-      <p class="inline-block rounded border border-dashed border-neutral-400 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-neutral-600">Planned for V2</p>
+      <p class="inline-block rounded border border-dashed border-neutral-400 px-2 py-0.5 text-[11px] font-medium uppercase tracking-wide text-neutral-600 dark:text-neutral-400">Planned for V2</p>
       <h2 class="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">More than projects. A library for the rest of your portfolio.</h2>
-      <p class="mt-4 text-base leading-relaxed text-neutral-600">Your portfolio can include experience, education, certifications, a resume, testimonials, and more. The planned Catalog Library will let you add reusable content structures and manage them alongside your existing projects.</p>
+      <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Your portfolio can include experience, education, certifications, a resume, testimonials, and more. The planned Catalog Library will let you add reusable content structures and manage them alongside your existing projects.</p>
       <a href="{% url 'feedback' %}?category=catalog"
-         class="mt-6 inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none">Suggest a catalog</a>
+         class="mt-6 inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">Suggest a catalog</a>
     </div>
 
     <div>
-      <ul class="divide-y divide-neutral-200 rounded-md border border-neutral-200 bg-white text-sm">
+      <ul class="divide-y divide-neutral-200 rounded-md border border-neutral-200 bg-white text-sm dark:border-neutral-800 dark:bg-neutral-900">
         <li class="flex items-center justify-between px-4 py-3"><span>Projects</span><span class="rounded border border-neutral-900 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide">Core</span></li>
         <li class="flex items-center justify-between px-4 py-3"><span>Tech Stack</span><span class="rounded border border-neutral-900 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide">Core</span></li>
         <li class="flex items-center justify-between px-4 py-3"><span>Services</span><span class="rounded border border-neutral-900 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide">Core</span></li>
-        <li class="flex items-center justify-between px-4 py-3 text-neutral-500"><span>Experience</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide">Planned</span></li>
-        <li class="flex items-center justify-between px-4 py-3 text-neutral-500"><span>Education</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide">Planned</span></li>
-        <li class="flex items-center justify-between px-4 py-3 text-neutral-500"><span>Certifications</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide">Planned</span></li>
-        <li class="flex items-center justify-between px-4 py-3 text-neutral-500"><span>Resume / CV</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide">Planned</span></li>
-        <li class="flex items-center justify-between px-4 py-3 text-neutral-500"><span>Testimonials</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide">Planned</span></li>
+        <li class="flex items-center justify-between px-4 py-3 text-neutral-500 dark:text-neutral-400"><span>Experience</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide dark:border-neutral-700">Planned</span></li>
+        <li class="flex items-center justify-between px-4 py-3 text-neutral-500 dark:text-neutral-400"><span>Education</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide dark:border-neutral-700">Planned</span></li>
+        <li class="flex items-center justify-between px-4 py-3 text-neutral-500 dark:text-neutral-400"><span>Certifications</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide dark:border-neutral-700">Planned</span></li>
+        <li class="flex items-center justify-between px-4 py-3 text-neutral-500 dark:text-neutral-400"><span>Resume / CV</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide dark:border-neutral-700">Planned</span></li>
+        <li class="flex items-center justify-between px-4 py-3 text-neutral-500 dark:text-neutral-400"><span>Testimonials</span><span class="rounded border border-dashed border-neutral-300 px-1.5 py-0.5 text-[10px] uppercase tracking-wide dark:border-neutral-700">Planned</span></li>
       </ul>
-      <p class="mt-3 text-xs text-neutral-500">Concept mockup. Planned items are not available yet.</p>
+      <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">Concept mockup. Planned items are not available yet.</p>
     </div>
   </div>
 </section>
 
 <!-- 11. Feedback -->
-<section id="feedback" class="scroll-mt-16 border-t border-neutral-200">
+<section id="feedback" class="scroll-mt-16 border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-14">
     <div>
       <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Help shape the product.</h2>
-      <p class="mt-4 text-base leading-relaxed text-neutral-600">Tell us what's useful, what's missing, or what you'd want the Catalog Library to support. No account needed, and your feedback is never shown publicly.</p>
+      <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">Tell us what's useful, what's missing, or what you'd want the Catalog Library to support. No account needed, and your feedback is never shown publicly.</p>
     </div>
     <div>
       {% include "landing/partials/_feedback_form.html" %}
@@ -345,13 +345,13 @@ data.results.forEach((project) => {
 </section>
 
 <!-- 12. Roadmap -->
-<section id="roadmap" class="scroll-mt-16 border-t border-neutral-200 bg-neutral-50">
+<section id="roadmap" class="scroll-mt-16 border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
   <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
     <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Roadmap</h2>
     <div class="mt-8 grid gap-4 md:grid-cols-2">
-      <div class="rounded-md border border-neutral-200 bg-white p-5">
+      <div class="rounded-md border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">
         <h3 class="text-sm font-semibold">Core CMS</h3>
-        <ul class="mt-3 space-y-1.5 text-sm text-neutral-700">
+        <ul class="mt-3 space-y-1.5 text-sm text-neutral-700 dark:text-neutral-300">
           <li><span aria-hidden="true">✓</span> <span class="sr-only">Done:</span> Projects</li>
           <li><span aria-hidden="true">✓</span> <span class="sr-only">Done:</span> Tech stack</li>
           <li><span aria-hidden="true">✓</span> <span class="sr-only">Done:</span> Services</li>
@@ -359,9 +359,9 @@ data.results.forEach((project) => {
           <li><span aria-hidden="true">✓</span> <span class="sr-only">Done:</span> Public API</li>
         </ul>
       </div>
-      <div class="rounded-md border border-dashed border-neutral-300 bg-white p-5">
+      <div class="rounded-md border border-dashed border-neutral-300 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
         <h3 class="text-sm font-semibold">Planned</h3>
-        <ul class="mt-3 space-y-1.5 text-sm text-neutral-600">
+        <ul class="mt-3 space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
           <li><span aria-hidden="true">○</span> <span class="sr-only">Planned:</span> Catalog Library</li>
           <li><span aria-hidden="true">○</span> <span class="sr-only">Planned:</span> Experience and education</li>
           <li><span aria-hidden="true">○</span> <span class="sr-only">Planned:</span> Certifications and resume content</li>
@@ -369,15 +369,15 @@ data.results.forEach((project) => {
         </ul>
       </div>
     </div>
-    <p class="mt-4 text-xs text-neutral-500">No dates are promised. Priorities depend on feedback.</p>
+    <p class="mt-4 text-xs text-neutral-500 dark:text-neutral-400">No dates are promised. Priorities depend on feedback.</p>
   </div>
 </section>
 
 <!-- 13. Final CTA -->
-<section class="border-t border-neutral-200">
+<section class="border-t border-neutral-200 dark:border-neutral-800">
   <div class="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 sm:py-20">
     <h2 class="mx-auto max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">Keep your content in one place. Build your portfolio your way.</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base text-neutral-600">Manage the data. Own the design. Use the API wherever your portfolio lives.</p>
+    <p class="mx-auto mt-4 max-w-xl text-base text-neutral-600 dark:text-neutral-400">Manage the data. Own the design. Use the API wherever your portfolio lives.</p>
     <a href="#feedback"
        class="mt-8 inline-flex items-center justify-center rounded-md bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 motion-reduce:transition-none">Share feedback</a>
   </div>

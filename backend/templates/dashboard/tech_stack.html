@@ -1,12 +1,12 @@
 {% extends "dashboard/layout.html" %}
 
 {% block title %}Tech Stack · My Portfolio CMS{% endblock %}
-{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Tech Stack{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">Dashboard</a> / Tech Stack{% endblock %}
 {% block heading %}Tech Stack{% endblock %}
 {% block heading_action %}<a href="{% url 'tech_create' %}" class="{{ primary_button_classes }} inline-flex w-fit items-center px-3 py-1.5 text-sm font-medium">+ Add Technology</a>{% endblock %}
 
 {% block content %}
-<div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
+<div class="divide-y divide-neutral-200 rounded-md border border-neutral-200 dark:border-neutral-800">
   {% for item in items %}
   <div class="flex flex-col gap-3 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
     <span class="flex items-center gap-2 font-medium">
@@ -14,17 +14,17 @@
     </span>
     <div class="min-w-0">
       <p class="break-words font-medium">{{ item.name }}</p>
-      {% if item.category %}<p class="mt-1 text-xs text-neutral-500">Category: {{ item.category.name }}</p>{% endif %}
-      {% if item.experience_level %}<p class="mt-1 text-xs text-neutral-500">Experience level: {{ item.experience_level }}/100</p>{% endif %}
+      {% if item.category %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Category: {{ item.category.name }}</p>{% endif %}
+      {% if item.experience_level %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Experience level: {{ item.experience_level }}/100</p>{% endif %}
     </div>
     <span class="flex items-center gap-4 text-xs sm:shrink-0">
-      <a href="{% url 'tech_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Edit</a>
+      <a href="{% url 'tech_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:text-neutral-400 dark:hover:text-neutral-100">Edit</a>
       <a href="{% url 'tech_delete' item.pk %}" class="{{ destructive_link_classes }}">Delete</a>
     </span>
   </div>
   {% empty %}
   <div class="px-4 py-8 text-center">
-    <p class="text-sm text-neutral-500">No technologies yet.</p>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">No technologies yet.</p>
     <a href="{% url 'tech_create' %}" class="{{ primary_button_classes }} mt-3 inline-flex px-3 py-1.5 text-sm font-medium">Add your first technology</a>
   </div>
   {% endfor %}

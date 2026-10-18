@@ -13,8 +13,15 @@ def style(form):
 
 
 class SignUpForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta(UserCreationForm.Meta):
+        fields = ("username", "email")
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.help_text = ""
         style(self)
 
 

@@ -13,4 +13,5 @@ def create_portfolio(sender, instance, created, **kwargs):
             owner=instance,
             name=instance.username,
             slug=unique_portfolio_slug(instance.username),
+            email=instance.email,
         )

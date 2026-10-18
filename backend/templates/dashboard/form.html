@@ -1,7 +1,7 @@
 {% extends "dashboard/layout.html" %}
 
 {% block title %}{% if object %}Edit{% else %}Add{% endif %} {{ label }} · My Portfolio CMS{% endblock %}
-{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / <a href="{{ list_url }}" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ section }}</a> / {% if object %}Edit{% else %}New{% endif %}{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">Dashboard</a> / <a href="{{ list_url }}" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">{{ section }}</a> / {% if object %}Edit{% else %}New{% endif %}{% endblock %}
 {% block heading %}{% if object %}Edit{% else %}Add{% endif %} {{ label|lower }}{% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
             {% for radio in field %}
             <label class="cursor-pointer">
               {{ radio.tag }}
-              <span class="flex h-16 flex-col items-center justify-center gap-1 rounded-md border border-neutral-200 text-[10px] text-neutral-600 hover:bg-neutral-50 peer-checked:border-neutral-900 peer-checked:text-neutral-900 peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-900">
+              <span class="flex h-16 flex-col items-center justify-center gap-1 rounded-md border border-neutral-200 text-[10px] text-neutral-600 hover:bg-neutral-50 peer-checked:border-neutral-900 peer-checked:text-neutral-900 peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800">
                 {% if radio.data.value %}
                   <img src="{{ form.icon_base }}{{ radio.data.value }}.svg" alt="" class="h-6 w-6" loading="lazy">
                 {% else %}
@@ -36,14 +36,14 @@
         <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
         {{ field }}
       {% endif %}
-      {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+      {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{{ field.help_text }}</p>{% endif %}
       {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
     </div>
   {% endfor %}
 
   <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
     <button type="submit" data-loading-text="Saving…" class="{{ primary_button_classes }} min-h-11 w-full px-4 py-2.5 text-base font-medium sm:w-auto sm:py-2 sm:text-sm">Save</button>
-    <a href="{{ list_url }}" class="text-sm text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Cancel</a>
+    <a href="{{ list_url }}" class="text-sm text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:text-neutral-400 dark:hover:text-neutral-100">Cancel</a>
   </div>
 </form>
 {% endblock %}

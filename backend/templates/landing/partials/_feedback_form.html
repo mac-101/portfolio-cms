@@ -14,12 +14,12 @@
       <div>
         <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
         {{ field }}
-        {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+        {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{{ field.help_text }}</p>{% endif %}
         {% for error in field.errors %}<p class="mt-1 text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
       </div>
     {% endif %}
   {% endfor %}
 
   <button type="submit" data-submit data-loading-text="Sending…"
-          class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 disabled:opacity-60 motion-reduce:transition-none sm:w-auto">Share feedback</button>
+          class="inline-flex w-full items-center justify-center rounded-md bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 disabled:opacity-60 motion-reduce:transition-none sm:w-auto dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-100 dark:focus-visible:ring-offset-neutral-950">Share feedback</button>
 </form>

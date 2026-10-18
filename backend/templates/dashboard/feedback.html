@@ -1,22 +1,22 @@
 {% extends "dashboard/layout.html" %}
 
 {% block title %}Leave feedback · My Portfolio CMS{% endblock %}
-{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Leave feedback{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">Dashboard</a> / Leave feedback{% endblock %}
 {% block heading %}Leave feedback{% endblock %}
 
 {% block content %}
 <div class="mx-auto grid min-w-0 max-w-3xl gap-6 lg:grid-cols-5 lg:gap-8">
   <section class="lg:col-span-2">
     <h2 class="text-sm font-semibold">Help improve My Portfolio CMS</h2>
-    <p class="mt-2 text-sm leading-relaxed text-neutral-600">Share an idea, report a bug, or tell us what’s working well. Your feedback helps us decide what to improve next.</p>
-    <div class="mt-5 border-l-2 border-neutral-200 pl-3">
-      <p class="text-xs leading-relaxed text-neutral-500">Please avoid including passwords or other sensitive information.</p>
+    <p class="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Share an idea, report a bug, or tell us what’s working well. Your feedback helps us decide what to improve next.</p>
+    <div class="mt-5 border-l-2 border-neutral-200 pl-3 dark:border-neutral-800">
+      <p class="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">Please avoid including passwords or other sensitive information.</p>
     </div>
   </section>
 
-  <section class="min-w-0 rounded-md border border-neutral-200 p-4 sm:p-6 lg:col-span-3">
+  <section class="min-w-0 rounded-md border border-neutral-200 p-4 sm:p-6 lg:col-span-3 dark:border-neutral-800">
     <h2 class="mb-1 text-sm font-semibold">Share your feedback</h2>
-    <p class="mb-5 text-xs text-neutral-500">Choose a category so we can understand your message.</p>
+    <p class="mb-5 text-xs text-neutral-500 dark:text-neutral-400">Choose a category so we can understand your message.</p>
     <form method="post" class="space-y-5" data-loading-form>
       {% csrf_token %}
       {% for error in form.non_field_errors %}<p class="text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
@@ -24,7 +24,7 @@
       <div>
         <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
         {{ field }}
-        {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500">{{ field.help_text }}</p>{% endif %}
+        {% if field.help_text %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{{ field.help_text }}</p>{% endif %}
         {% for error in field.errors %}<p class="mt-1 text-xs text-red-600" role="alert">{{ error }}</p>{% endfor %}
       </div>
       {% endfor %}

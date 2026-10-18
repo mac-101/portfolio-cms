@@ -1,12 +1,12 @@
 {% extends "dashboard/layout.html" %}
 
 {% block title %}Services · My Portfolio CMS{% endblock %}
-{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Dashboard</a> / Services{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">Dashboard</a> / Services{% endblock %}
 {% block heading %}Services{% endblock %}
 {% block heading_action %}<a href="{% url 'service_create' %}" class="{{ primary_button_classes }} inline-flex w-fit items-center px-3 py-1.5 text-sm font-medium">+ Add Service</a>{% endblock %}
 
 {% block content %}
-<div class="divide-y divide-neutral-200 rounded-md border border-neutral-200">
+<div class="divide-y divide-neutral-200 rounded-md border border-neutral-200 dark:border-neutral-800">
   {% for item in items %}
   <div class="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
     <div class="min-w-0 flex gap-3 items-start">
@@ -17,19 +17,19 @@
       {% endif %}
       <div>
         <p class="break-words text-sm font-medium"><a href="{% url 'service_detail' item.pk %}" class="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ item.title }}</a></p>
-        {% if item.description %}<p class="mt-1 break-words text-xs text-neutral-500">{{ item.description }}</p>{% endif %}
+        {% if item.description %}<p class="mt-1 break-words text-xs text-neutral-500 dark:text-neutral-400">{{ item.description }}</p>{% endif %}
       </div>
   
     </div>
     <span class="flex items-center gap-4 text-xs sm:shrink-0">
-      <a href="{% url 'service_detail' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">View</a>
-      <a href="{% url 'service_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">Edit</a>
+      <a href="{% url 'service_detail' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:text-neutral-400 dark:hover:text-neutral-100">View</a>
+      <a href="{% url 'service_update' item.pk %}" class="text-neutral-600 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:text-neutral-400 dark:hover:text-neutral-100">Edit</a>
       <a href="{% url 'service_delete' item.pk %}" class="{{ destructive_link_classes }}">Delete</a>
     </span>
   </div>
   {% empty %}
   <div class="px-4 py-8 text-center">
-    <p class="text-sm text-neutral-500">No services yet.</p>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">No services yet.</p>
     <a href="{% url 'service_create' %}" class="{{ primary_button_classes }} mt-3 inline-flex px-3 py-1.5 text-sm font-medium">Add your first service</a>
   </div>
   {% endfor %}

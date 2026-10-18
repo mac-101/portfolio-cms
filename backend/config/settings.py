@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.debug',
+                'landing.context.product',
             ],
         },
     },
@@ -111,6 +112,8 @@ CLOUDINARY_STORAGE = {
     "API_KEY": env("CLOUDINARY_API_KEY"),
     "API_SECRET": env("CLOUDINARY_API_SECRET"),
 }
+
+PRODUCT_NAME = env("PRODUCT_NAME", default="My Portfolio CMS")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
