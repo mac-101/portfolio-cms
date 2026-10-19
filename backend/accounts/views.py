@@ -10,7 +10,7 @@ def signup(request):
 
     form = SignUpForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
-        user = form.save()          # the signal creates the Portfolio here
+        user = form.save()
         login(request, user)
         return redirect("dashboard_home")
 

@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, transaction
 from django.utils.text import slugify
+from accounts.utils import username_for_full_name
 from .icons import SERVICE_ICON_BASE, SERVICE_ICONS, TECH_ICON_BASE, TECH_ICONS
 from .models import Portfolio, Project, Resume, Service, SocialLink, Stack_Category, TechStack
 from .utils import RESERVED
@@ -15,14 +16,43 @@ INPUT = (
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ["name", "slug", "bio", "profile_image", "location", "email"]
+        fields = ["full_name", "name", "slug", "bio", "profile_image", "location", "email"]
         widgets = {"bio": forms.Textarea(attrs={"rows": 4})}
+        labels = {"full_name": "Full name"}
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, user, **kwargs):
         super().__init__(*args, **kwargs)
+        self.user = user
+        self.fields["full_name"].required = True
+        self.fields["full_name"].initial = (
+            self.instance.full_name or user.get_full_name() or user.username
+        )
         for field in self.fields.values():
             if not isinstance(field.widget, forms.ClearableFileInput):
                 field.widget.attrs["class"] = INPUT
+
+    def clean_full_name(self):
+        full_name = " ".join(self.cleaned_data["full_name"].split())
+        name_parts = full_name.split(" ", 1)
+        if not username_for_full_name(full_name, self.user):
+            raise ValidationError("Enter a name containing letters or numbers.")
+        if len(name_parts[0]) > 150 or (len(name_parts) > 1 and len(name_parts[1]) > 150):
+            raise ValidationError("Each part of your name must be 150 characters or fewer.")
+        return full_name
+
+    def save(self, commit=True):
+        full_name = self.cleaned_data["full_name"]
+        self.instance.full_name = full_name
+        name_parts = full_name.split(" ", 1)
+        self.user.first_name = name_parts[0]
+        self.user.last_name = name_parts[1] if len(name_parts) > 1 else ""
+        self.user.username = username_for_full_name(full_name, self.user)
+        if commit:
+            with transaction.atomic():
+                portfolio = super().save(commit=True)
+                self.user.save(update_fields=["first_name", "last_name", "username"])
+                return portfolio
+        return super().save(commit=False)
 
     def clean_slug(self):
         slug = self.cleaned_data["slug"].lower()

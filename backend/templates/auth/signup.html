@@ -6,7 +6,7 @@
   <div class="absolute right-4 top-4">{% include "partials/theme_toggle.html" %}</div>
   <div class="w-full max-w-sm">
     <h1 class="mb-1 text-xl font-semibold tracking-tight">Create your account</h1>
-    <p class="mb-6 text-sm text-neutral-500 dark:text-neutral-400">Manage your portfolio and expose it through an API. Your email is saved with your account.</p>
+    <p class="mb-6 text-sm text-neutral-500 dark:text-neutral-400">Manage your portfolio and expose it through an API. Your username is generated from your full name.</p>
 
     <form method="post" class="space-y-5 {{ auth_control_classes }}" data-loading-form>
       {% csrf_token %}

@@ -10,10 +10,10 @@
     {% if portfolio.profile_image %}
     <img src="{{ portfolio.profile_image.url }}" alt="{{ portfolio.name }}" class="h-16 w-16 shrink-0 rounded-md border border-neutral-200 object-cover dark:border-neutral-800">
     {% else %}
-    <div aria-hidden="true" class="flex h-16 w-16 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-lg font-medium text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">{{ portfolio.name|first|upper }}</div>
+    <div aria-hidden="true" class="flex h-16 w-16 shrink-0 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-lg font-medium text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">{{ portfolio.full_name|default:user.username|first|upper }}</div>
     {% endif %}
     <div class="min-w-0">
-      <p class="truncate text-base font-semibold">{{ portfolio.name }}</p>
+      <p class="truncate text-base font-semibold">{{ portfolio.full_name|default:user.username }}</p>
       {% if portfolio.email %}<p class="mt-1 truncate text-sm text-neutral-600 dark:text-neutral-400">{{ portfolio.email }}</p>{% endif %}
       {% if portfolio.location %}<p class="mt-1 truncate text-xs text-neutral-500 dark:text-neutral-400">{{ portfolio.location }}</p>{% endif %}
     </div>
@@ -22,7 +22,7 @@
   <section class="rounded-md border border-neutral-200 dark:border-neutral-800">
     <div class="border-b border-neutral-200 px-4 py-4 sm:px-6 dark:border-neutral-800">
       <h2 class="text-sm font-semibold">Profile details</h2>
-      <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Update the public information shown on your portfolio.</p>
+      <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Update your account name and the public information shown on your portfolio. Your username is generated from your full name.</p>
     </div>
     <form method="post" enctype="multipart/form-data" class="space-y-5 p-4 sm:p-6 {{ form_control_classes }}" data-loading-form>
       {% csrf_token %}

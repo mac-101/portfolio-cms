@@ -90,7 +90,12 @@ def social_list(request):
 @login_required
 def settings_view(request):
     portfolio = request.user.portfolio
-    form = PortfolioForm(request.POST or None, request.FILES or None, instance=portfolio)
+    form = PortfolioForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=portfolio,
+        user=request.user,
+    )
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Settings saved.")

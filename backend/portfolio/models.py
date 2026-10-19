@@ -42,6 +42,7 @@ class Portfolio(models.Model):
     owner = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="portfolio"
     )
+    full_name = models.CharField(max_length=300, blank=True)
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=200, null=True)
     slug = models.SlugField(max_length=50, unique=True)

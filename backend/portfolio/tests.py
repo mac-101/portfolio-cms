@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from api.serializers import ProjectSerializer, TechStackSerializer
-from .forms import ProjectForm, TechStackForm
+from .forms import PortfolioForm, ProjectForm, TechStackForm
 from .models import Project, Resume, Stack_Category, TechStack
 
 
@@ -141,6 +141,29 @@ class CustomCategoryFormTests(TestCase):
 
         self.assertEqual(ProjectSerializer(project).data["category"], "Data Science")
         self.assertEqual(TechStackSerializer(technology).data["category"], "Data Science")
+
+    def test_profile_full_name_updates_account_and_generates_username(self):
+        form = PortfolioForm(
+            data={
+                "full_name": "Jordan Smith",
+                "name": self.portfolio.name,
+                "slug": self.portfolio.slug,
+                "bio": self.portfolio.bio,
+                "location": self.portfolio.location,
+                "email": self.portfolio.email,
+            },
+            instance=self.portfolio,
+            user=self.portfolio.owner,
+        )
+
+        self.assertTrue(form.is_valid(), form.errors)
+        form.save()
+
+        self.portfolio.owner.refresh_from_db()
+        self.portfolio.refresh_from_db()
+        self.assertEqual(self.portfolio.full_name, "Jordan Smith")
+        self.assertEqual(self.portfolio.owner.get_full_name(), "Jordan Smith")
+        self.assertEqual(self.portfolio.owner.username, "jordan_smith")
 
 
 class ResumeUploadTests(TestCase):
