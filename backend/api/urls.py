@@ -9,4 +9,5 @@ urlpatterns = [
     path("portfolios/<slug:slug>/tech-stack/", views.TechStackList.as_view()),
     path("portfolios/<slug:slug>/services/", views.ServiceList.as_view()),
     path("portfolios/<slug:slug>/socials/", views.SocialLinkList.as_view()),
+    path("portfolios/<slug:slug>/resume/", views.ResumeDetail.as_view(), name="public_resume"),
 ]

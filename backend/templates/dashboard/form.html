@@ -32,6 +32,14 @@
         </fieldset>
       {% elif field.widget_type == "checkbox" %}
         <label class="flex items-center gap-2 text-sm font-medium">{{ field }} {{ field.label }}</label>
+      {% elif field.name == "category" and "new_category" in form.fields %}
+      {% elif field.name == "new_category" %}
+        {% if form.category %}
+        <label for="{{ form.category.id_for_label }}" class="mb-1 block text-sm font-medium">{{ form.category.label }}</label>
+        {{ form.category }}
+        {% endif %}
+        <label for="{{ field.id_for_label }}" class="mb-1 mt-3 block text-sm font-medium">{{ field.label }}</label>
+        {{ field }}
       {% else %}
         <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium">{{ field.label }}</label>
         {{ field }}

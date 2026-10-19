@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
-from portfolio.models import Portfolio, Project, Service, SocialLink, TechStack
+from portfolio.models import Portfolio, Project, Resume, Service, SocialLink, TechStack
 
 from .serializers import (
-    PortfolioSerializer, ProjectSerializer, ServiceSerializer,
+    PortfolioSerializer, ProjectSerializer, ResumeSerializer, ServiceSerializer,
     SocialLinkSerializer, TechStackSerializer,
 )
 
@@ -67,3 +67,10 @@ class SocialLinkList(PortfolioScopedMixin, generics.ListAPIView):
 
     def get_queryset(self):
         return SocialLink.objects.filter(portfolio=self.get_portfolio()).order_by("id")
+
+
+class ResumeDetail(PortfolioScopedMixin, generics.RetrieveAPIView):
+    serializer_class = ResumeSerializer
+
+    def get_object(self):
+        return get_object_or_404(Resume, portfolio=self.get_portfolio())

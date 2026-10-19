@@ -29,6 +29,8 @@ urlpatterns = [
     path("socials/<int:pk>/delete/", views.SocialDelete.as_view(), name="social_delete"),
 
     path("settings/", views.settings_view, name="settings"),
+    path("resume/", views.resume_manage, name="resume_manage"),
+    path("resume/delete/", views.resume_delete, name="resume_delete"),
     path("api/", views.api_info, name="api_info"),
     
     path("feedback/", landing_views.dashboard_feedback, name="dashboard_feedback"),

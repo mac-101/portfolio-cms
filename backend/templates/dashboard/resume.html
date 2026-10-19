@@ -1,0 +1,60 @@
+{% extends "dashboard/layout.html" %}
+
+{% block title %}Resume · My Portfolio CMS{% endblock %}
+{% block breadcrumb %}<a href="/dashboard/" class="hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:hover:text-neutral-100">Dashboard</a> / Resume{% endblock %}
+{% block heading %}Resume{% endblock %}
+
+{% block content %}
+<div class="max-w-xl space-y-6">
+  <section class="rounded-md border border-neutral-200 p-4 dark:border-neutral-800 sm:p-5">
+    <h2 class="text-sm font-semibold">Your resume</h2>
+    <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Upload a PDF or Word document. Each account can have one resume; a new upload replaces the previous file.</p>
+
+    {% if resume %}
+    <div class="mt-4 flex flex-col gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-800 dark:bg-neutral-900 sm:flex-row sm:items-center sm:justify-between">
+      <div class="min-w-0">
+        <p class="truncate text-sm font-medium">{{ resume.original_filename }}</p>
+        <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Uploaded {{ resume.uploaded_at|date:"j M Y, H:i" }}</p>
+      </div>
+      <a href="{{ resume.file.url }}" target="_blank" rel="noopener noreferrer" class="{{ secondary_button_classes }} inline-flex shrink-0 items-center gap-2 px-3 py-1.5 text-sm">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75V3.75m0 12 4.5-4.5m-4.5 4.5-4.5-4.5M4.5 17.25v2.25h15v-2.25"/></svg>
+        View / download
+      </a>
+    </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="mt-5 space-y-4 {{ form_control_classes }}" data-loading-form>
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}<p class="text-xs text-red-600">{{ error }}</p>{% endfor %}
+      <div>
+        <label for="{{ form.file.id_for_label }}" class="mb-1 block text-sm font-medium">
+          {% if resume %}Choose a replacement file{% else %}Choose a resume file{% endif %}
+        </label>
+        {{ form.file }}
+        {% if form.file.help_text %}<p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">{{ form.file.help_text }}</p>{% endif %}
+        {% for error in form.file.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+      </div>
+      <button type="submit" data-loading-text="Uploading…" class="{{ primary_button_classes }} inline-flex min-h-11 items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75V3.75m0 0 4.5 4.5M12 3.75 7.5 8.25M4.5 15.75v4.5h15v-4.5"/></svg>
+        {% if resume %}Replace resume{% else %}Upload resume{% endif %}
+      </button>
+    </form>
+
+    {% if resume %}
+    <form method="post" action="{% url 'resume_delete' %}" class="mt-4 border-t border-neutral-200 pt-4 dark:border-neutral-800" data-loading-form>
+      {% csrf_token %}
+      <button type="submit" data-loading-text="Deleting…" class="{{ destructive_link_classes }} inline-flex items-center gap-2 text-sm">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 7.5h15m-13.5 0 .75 12h10.5l.75-12M9 7.5V5.25h6V7.5m-5.25 3v5.25m4.5-5.25v5.25"/></svg>
+        Delete resume
+      </button>
+    </form>
+    {% endif %}
+  </section>
+
+  <section class="rounded-md border border-neutral-200 p-4 dark:border-neutral-800">
+    <h2 class="text-sm font-semibold">Public API</h2>
+    <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">When uploaded, the resume URL is available from your public portfolio API.</p>
+    <code class="mt-3 block break-all rounded-md bg-neutral-50 px-3 py-2 text-xs dark:bg-neutral-900">{{ request.scheme }}://{{ request.get_host }}/api/public/portfolios/{{ user.portfolio.slug }}/resume/</code>
+  </section>
+</div>
+{% endblock %}

@@ -7,6 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django.http import Http404
+from django.db import transaction
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView
@@ -14,11 +15,12 @@ from django.views.generic import DetailView
 from .forms import (
     PortfolioForm,
     ProjectForm,
+    ResumeForm,
     ServiceForm,
     SocialLinkForm,
     TechStackForm,
 )
-from .models import Project, Service, SocialLink, TechStack
+from .models import Project, Resume, Service, SocialLink, TechStack
 
 def api_base(request, portfolio):
     return request.build_absolute_uri(f"/api/public/portfolios/{portfolio.slug}/")
@@ -53,21 +55,21 @@ def dashboard_home(request):
         "stats": stats,
         "checklist": checklist,
         "done_count": sum(1 for _, done in checklist if done),
-        "recent_projects": projects.prefetch_related("tech_stack")[:5],
+        "recent_projects": projects.select_related("category").prefetch_related("tech_stack")[:5],
         "api_url": api_base(request, portfolio),
     })
 
 
 @login_required
 def project_list(request):
-    projects = request.user.portfolio.projects.prefetch_related("tech_stack")
+    projects = request.user.portfolio.projects.select_related("category").prefetch_related("tech_stack")
     return render(request, "dashboard/projects.html", {"projects": projects})
 
 
 @login_required
 def tech_list(request):
     return render(request, "dashboard/tech_stack.html", {
-        "items": request.user.portfolio.tech_stack.all()
+        "items": request.user.portfolio.tech_stack.select_related("category")
     })
 
 
@@ -95,10 +97,52 @@ def settings_view(request):
         return redirect("settings")
     return render(request, "dashboard/settings.html", {"form": form, "portfolio": portfolio})
 
+
+@login_required
+def resume_manage(request):
+    portfolio = request.user.portfolio
+    resume = Resume.objects.filter(portfolio=portfolio).first()
+    old_file_name = resume.file.name if resume and resume.file else None
+    old_file_storage = resume.file.storage if resume and resume.file else None
+    form = ResumeForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=resume,
+        portfolio=portfolio,
+    )
+    if request.method == "POST" and form.is_valid():
+        with transaction.atomic():
+            saved_resume = form.save()
+            if old_file_name and old_file_name != saved_resume.file.name:
+                transaction.on_commit(
+                    lambda: old_file_storage.delete(old_file_name)
+                )
+        messages.success(request, "Resume uploaded.")
+        return redirect("resume_manage")
+    return render(request, "dashboard/resume.html", {
+        "form": form,
+        "resume": resume,
+    })
+
+
+@login_required
+@require_POST
+def resume_delete(request):
+    resume = get_object_or_404(Resume, portfolio=request.user.portfolio)
+    file_name = resume.file.name
+    file_storage = resume.file.storage
+    with transaction.atomic():
+        resume.delete()
+        transaction.on_commit(lambda: file_storage.delete(file_name))
+    messages.success(request, "Resume deleted.")
+    return redirect("resume_manage")
+
+
 def build_endpoints(base, portfolio):
     project = {
         "title": "EchoNote",
         "slug": "echonote",
+        "category": "Developer Tools",
         "description": "A Django notes application.",
         "image": "https://res.cloudinary.com/your-cloud/image/upload/echonote.jpg",
         "tech_stack": ["Python", "Django"],
@@ -146,6 +190,7 @@ def build_endpoints(base, portfolio):
                 "name": "Django",
                 "slug": "django",
                 "icon": "",
+                "category": "backend",
                 "experience_level": 75,
             }),
         },
@@ -168,6 +213,16 @@ def build_endpoints(base, portfolio):
                 "url": "https://github.com/you",
                 "label": "",
             }),
+        },
+        {
+            "title": "Resume",
+            "path": "resume/",
+            "description": "Your uploaded resume as a downloadable file URL.",
+            "example": {
+                "file": f"{base}resume-file.pdf",
+                "original_filename": "resume.pdf",
+                "uploaded_at": "2026-10-08T21:14:03Z",
+            },
         },
     ]
 
@@ -328,7 +383,7 @@ class ProjectDetail(ProjectMeta, PortfolioMixin, DetailView):
     template_name = "dashboard/project_detail.html"
 
     def get_queryset(self):
-        return super().get_queryset().prefetch_related("tech_stack")
+        return super().get_queryset().select_related("category").prefetch_related("tech_stack")
 
 
 @login_required

@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError, transaction
 from django.utils.text import slugify
 from .icons import SERVICE_ICON_BASE, SERVICE_ICONS, TECH_ICON_BASE, TECH_ICONS
-from .models import Portfolio, Project, Service, SocialLink, Stack_Category, TechStack
+from .models import Portfolio, Project, Resume, Service, SocialLink, Stack_Category, TechStack
 from .utils import RESERVED
 
 INPUT = (
@@ -52,6 +53,46 @@ class PortfolioScopedForm(forms.ModelForm):
         style_fields(self)
 
 
+class CustomCategoryFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        category_field = self.fields["category"]
+        category_field.queryset = Stack_Category.objects.order_by("name")
+        category_field.empty_label = "Choose a category"
+
+    def _resolve_category(self):
+        name = " ".join(self.cleaned_data.get("new_category", "").split())
+        if not name:
+            return self.cleaned_data.get("category")
+        category = Stack_Category.objects.filter(name__iexact=name).first()
+        if category:
+            return category
+        try:
+            with transaction.atomic():
+                return Stack_Category.objects.create(name=name)
+        except IntegrityError:
+            return Stack_Category.objects.get(name__iexact=name)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            with transaction.atomic():
+                instance.category = self._resolve_category()
+                instance.save()
+                self.save_m2m()
+        else:
+            instance.category = self.cleaned_data.get("category")
+            save_m2m = self.save_m2m
+
+            def save_with_category():
+                instance.category = self._resolve_category()
+                instance.save(update_fields=["category"])
+                save_m2m()
+
+            self.save_m2m = save_with_category
+        return instance
+
+
 class SluggedFormMixin:
     """Stops duplicate slugs per portfolio with a form error instead of a crash."""
 
@@ -69,12 +110,18 @@ class SluggedFormMixin:
         return cleaned
 
 
-class ProjectForm(SluggedFormMixin, PortfolioScopedForm):
+class ProjectForm(CustomCategoryFormMixin, SluggedFormMixin, PortfolioScopedForm):
     slug_source = "title"
+    new_category = forms.CharField(
+        max_length=50,
+        required=False,
+        label="Or add a new category",
+        help_text="If entered, this category will be created and selected.",
+    )
 
     class Meta:
         model = Project
-        fields = ["title", "description", "image", "tech_stack",
+        fields = ["title", "category", "new_category", "description", "image", "tech_stack",
                   "github_url", "live_url", "featured", "published"]
         widgets = {
             "description": forms.Textarea(attrs={"rows": 4}),
@@ -88,31 +135,30 @@ class ProjectForm(SluggedFormMixin, PortfolioScopedForm):
         self.fields["tech_stack"].help_text = "Manage your technologies on the Tech Stack page."
 
 
-class TechStackForm(SluggedFormMixin, PortfolioScopedForm):
+class TechStackForm(CustomCategoryFormMixin, SluggedFormMixin, PortfolioScopedForm):
     slug_source = "name"
     icon_base = TECH_ICON_BASE
+    new_category = forms.CharField(
+        max_length=50,
+        required=False,
+        label="Or add a new category",
+        help_text="If entered, this category will be created and selected.",
+    )
     icon = forms.ChoiceField(
         choices=[("", "None")] + TECH_ICONS,
         required=False,
         widget=forms.RadioSelect,
         help_text="Leave on None and we'll try to match the name.",
     )
-    
     class Meta:
         model = TechStack
-        fields = ["name", "category", "experience_level", "icon"]
+        fields = ["name", "category", "new_category", "experience_level", "icon"]
         help_texts = {
             "experience_level": "Enter a value from 1 to 100, or leave blank if unknown."
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        category_field = self.fields["category"]
-        valid_categories = [value for value, _ in Stack_Category.CHOICE]
-        category_field.queryset = Stack_Category.objects.filter(
-            name__in=valid_categories
-        ).order_by("id")
-        category_field.empty_label = "Choose a category"
 
 
 class ServiceForm(PortfolioScopedForm):
@@ -132,3 +178,24 @@ class SocialLinkForm(PortfolioScopedForm):
     class Meta:
         model = SocialLink
         fields = ["platform", "url", "label"]
+
+
+class ResumeForm(forms.ModelForm):
+    class Meta:
+        model = Resume
+        fields = ["file"]
+        labels = {"file": "Resume file"}
+        help_texts = {
+            "file": "Accepted formats: PDF, DOC, or DOCX. Uploading a new file replaces your current resume."
+        }
+        widgets = {
+            "file": forms.ClearableFileInput(
+                attrs={"accept": ".pdf,.doc,.docx,application/pdf"}
+            )
+        }
+
+    def __init__(self, *args, portfolio, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.portfolio = portfolio
+        self.instance.portfolio = portfolio
+        style_fields(self)

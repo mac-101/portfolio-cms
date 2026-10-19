@@ -1,5 +1,17 @@
 from django.contrib import admin
-from .models import Portfolio, TechStack, Project, Service, SocialLink
+from .models import Portfolio, Project, Resume, Service, SocialLink, Stack_Category, TechStack
+
+
+@admin.register(Stack_Category)
+class StackCategoryAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ("portfolio", "uploaded_at")
+    search_fields = ("portfolio__name", "portfolio__owner__username")
 
 
 @admin.register(Portfolio)

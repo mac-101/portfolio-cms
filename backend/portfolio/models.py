@@ -1,9 +1,10 @@
 import uuid
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import FileExtensionValidator, MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 from pathlib import Path
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 from .icons import SERVICE_ICON_BASE, TECH_ICON_BASE, guess_tech_icon
 
 
@@ -16,6 +17,12 @@ def profile_image_path(instance, filename):
     ext = Path(filename).suffix.lower()
     return f"users/{instance.owner_id}/profile/{uuid.uuid4().hex}{ext}"
 
+
+def resume_file_path(instance, filename):
+    ext = Path(filename).suffix.lower()
+    return f"users/{instance.portfolio.owner_id}/resume/{uuid.uuid4().hex}{ext}"
+
+
 class Stack_Category(models.Model):
     CHOICE = (
         ("frontend", "Frontend"),
@@ -25,10 +32,10 @@ class Stack_Category(models.Model):
         ("mobile", "Mobile"),
         ("other", "Other"),
     )
-    name = models.CharField(max_length=50, choices=CHOICE, unique=True)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
-        return self.get_name_display()
+        return dict(self.CHOICE).get(self.name, self.name)
 
 
 class Portfolio(models.Model):
@@ -86,6 +93,13 @@ class TechStack(models.Model):
 class Project(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name="projects")
     title = models.CharField(max_length=120)
+    category = models.ForeignKey(
+        Stack_Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="projects",
+    )
     slug = models.SlugField(max_length=140, blank=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to=project_image_path, blank=True)
@@ -135,3 +149,26 @@ class SocialLink(models.Model):
 
     def __str__(self):
         return f"{self.platform}: {self.url}"
+
+
+class Resume(models.Model):
+    portfolio = models.OneToOneField(
+        Portfolio,
+        on_delete=models.CASCADE,
+        related_name="resume",
+    )
+    file = models.FileField(
+        storage=RawMediaCloudinaryStorage(),
+        upload_to=resume_file_path,
+        validators=[FileExtensionValidator(allowed_extensions=["pdf", "doc", "docx"])],
+    )
+    original_filename = models.CharField(max_length=255, blank=True)
+    uploaded_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.file and not self.file._committed:
+            self.original_filename = Path(self.file.name).name
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Resume for {self.portfolio.name}"

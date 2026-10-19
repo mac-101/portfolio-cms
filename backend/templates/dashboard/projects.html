@@ -20,6 +20,7 @@
           <a href="{% url 'project_detail' project.pk %}" class="break-words hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2">{{ project.title }}</a>{% if project.featured %} <span class="text-xs text-neutral-500 dark:text-neutral-400">★ Featured</span>{% endif %}
         </p>
         <p class="mt-1 break-words text-xs text-neutral-500 dark:text-neutral-400">
+          {% if project.category %}<span>{{ project.category }}</span>{% if project.tech_stack.all %} · {% endif %}{% endif %}
           {% for tech in project.tech_stack.all %}{{ tech.name }}{% if not forloop.last %} · {% endif %}{% empty %}No tech added{% endfor %}
         </p>
       </div>

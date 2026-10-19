@@ -48,6 +48,7 @@
     <section class="rounded-md border border-neutral-200 p-4 dark:border-neutral-800">
       <h2 class="mb-3 text-sm font-semibold">Status</h2>
       <div class="flex flex-wrap gap-2 text-xs">
+        {% if object.category %}<span class="rounded-md border border-neutral-200 px-2 py-0.5 dark:border-neutral-800">{{ object.category }}</span>{% endif %}
         <span class="rounded-md border border-neutral-200 px-2 py-0.5 dark:border-neutral-800">{% if object.published %}Published{% else %}Draft{% endif %}</span>
         {% if object.featured %}<span class="rounded-md border border-neutral-200 px-2 py-0.5 dark:border-neutral-800">★ Featured</span>{% endif %}
       </div>
