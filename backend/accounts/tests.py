@@ -17,7 +17,7 @@ class SignUpFormTests(TestCase):
         self.assertEqual(user.email, "owner@example.com")
         self.assertEqual(user.get_full_name(), "Portfolio User")
         self.assertEqual(user.username, "portfolio_user")
-        self.assertEqual(user.portfolio.full_name, "Portfolio User")
+        self.assertEqual(user.portfolio.name, "Portfolio User")
         self.assertEqual(user.portfolio.email, "owner@example.com")
 
     def test_email_is_required(self):

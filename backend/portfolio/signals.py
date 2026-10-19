@@ -11,7 +11,6 @@ def create_portfolio(sender, instance, created, **kwargs):
     if created:
         Portfolio.objects.create(
             owner=instance,
-            full_name=instance.get_full_name() or instance.username,
             name=instance.get_full_name() or instance.username,
             slug=unique_portfolio_slug(instance.username),
             email=instance.email,

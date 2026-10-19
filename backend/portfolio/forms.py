@@ -16,23 +16,20 @@ INPUT = (
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ["full_name", "name", "slug", "bio", "profile_image", "location", "email"]
+        fields = ["name", "slug", "bio", "profile_image", "location", "email"]
         widgets = {"bio": forms.Textarea(attrs={"rows": 4})}
-        labels = {"full_name": "Full name"}
+        labels = {"name": "Full name"}
 
     def __init__(self, *args, user, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-        self.fields["full_name"].required = True
-        self.fields["full_name"].initial = (
-            self.instance.full_name or user.get_full_name() or user.username
-        )
+        self.fields["name"].initial = self.instance.name or user.get_full_name() or user.username
         for field in self.fields.values():
             if not isinstance(field.widget, forms.ClearableFileInput):
                 field.widget.attrs["class"] = INPUT
 
-    def clean_full_name(self):
-        full_name = " ".join(self.cleaned_data["full_name"].split())
+    def clean_name(self):
+        full_name = " ".join(self.cleaned_data["name"].split())
         name_parts = full_name.split(" ", 1)
         if not username_for_full_name(full_name, self.user):
             raise ValidationError("Enter a name containing letters or numbers.")
@@ -41,8 +38,7 @@ class PortfolioForm(forms.ModelForm):
         return full_name
 
     def save(self, commit=True):
-        full_name = self.cleaned_data["full_name"]
-        self.instance.full_name = full_name
+        full_name = self.cleaned_data["name"]
         name_parts = full_name.split(" ", 1)
         self.user.first_name = name_parts[0]
         self.user.last_name = name_parts[1] if len(name_parts) > 1 else ""

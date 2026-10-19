@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
 
-from api.serializers import ProjectSerializer, TechStackSerializer
+from api.serializers import PortfolioSerializer, ProjectSerializer, TechStackSerializer
 from .forms import PortfolioForm, ProjectForm, TechStackForm
 from .models import Project, Resume, Stack_Category, TechStack
 
@@ -145,8 +145,7 @@ class CustomCategoryFormTests(TestCase):
     def test_profile_full_name_updates_account_and_generates_username(self):
         form = PortfolioForm(
             data={
-                "full_name": "Jordan Smith",
-                "name": self.portfolio.name,
+                "name": "Jordan Smith",
                 "slug": self.portfolio.slug,
                 "bio": self.portfolio.bio,
                 "location": self.portfolio.location,
@@ -161,7 +160,8 @@ class CustomCategoryFormTests(TestCase):
 
         self.portfolio.owner.refresh_from_db()
         self.portfolio.refresh_from_db()
-        self.assertEqual(self.portfolio.full_name, "Jordan Smith")
+        self.assertEqual(self.portfolio.name, "Jordan Smith")
+        self.assertEqual(PortfolioSerializer(self.portfolio).data["name"], "Jordan Smith")
         self.assertEqual(self.portfolio.owner.get_full_name(), "Jordan Smith")
         self.assertEqual(self.portfolio.owner.username, "jordan_smith")
 
