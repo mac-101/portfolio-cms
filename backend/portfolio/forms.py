@@ -24,6 +24,8 @@ class PortfolioForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.user = user
         self.fields["name"].initial = self.instance.name or user.get_full_name() or user.username
+        self.fields["email"].required = True
+        self.fields["email"].initial = self.instance.email or user.email
         for field in self.fields.values():
             if not isinstance(field.widget, forms.ClearableFileInput):
                 field.widget.attrs["class"] = INPUT
@@ -43,10 +45,13 @@ class PortfolioForm(forms.ModelForm):
         self.user.first_name = name_parts[0]
         self.user.last_name = name_parts[1] if len(name_parts) > 1 else ""
         self.user.username = username_for_full_name(full_name, self.user)
+        self.user.email = self.cleaned_data["email"]
         if commit:
             with transaction.atomic():
                 portfolio = super().save(commit=True)
-                self.user.save(update_fields=["first_name", "last_name", "username"])
+                self.user.save(
+                    update_fields=["first_name", "last_name", "username", "email"]
+                )
                 return portfolio
         return super().save(commit=False)
 
@@ -55,6 +60,16 @@ class PortfolioForm(forms.ModelForm):
         if slug in RESERVED:
             raise ValidationError("That slug is reserved. Please choose another.")
         return slug
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].strip()
+        if email.casefold() != (self.user.email or "").casefold():
+            conflicting_users = self.user.__class__._default_manager.filter(
+                email__iexact=email
+            ).exclude(pk=self.user.pk)
+            if conflicting_users.exists():
+                raise ValidationError("An account with this email address already exists.")
+        return email
     
 def style_fields(form):
     for field in form.fields.values():

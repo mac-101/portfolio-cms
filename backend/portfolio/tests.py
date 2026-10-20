@@ -149,7 +149,7 @@ class CustomCategoryFormTests(TestCase):
                 "slug": self.portfolio.slug,
                 "bio": self.portfolio.bio,
                 "location": self.portfolio.location,
-                "email": self.portfolio.email,
+                "email": "jordan@example.com",
             },
             instance=self.portfolio,
             user=self.portfolio.owner,
@@ -164,6 +164,8 @@ class CustomCategoryFormTests(TestCase):
         self.assertEqual(PortfolioSerializer(self.portfolio).data["name"], "Jordan Smith")
         self.assertEqual(self.portfolio.owner.get_full_name(), "Jordan Smith")
         self.assertEqual(self.portfolio.owner.username, "jordan_smith")
+        self.assertEqual(self.portfolio.email, "jordan@example.com")
+        self.assertEqual(self.portfolio.owner.email, "jordan@example.com")
 
 
 class ResumeUploadTests(TestCase):

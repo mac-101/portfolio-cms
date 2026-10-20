@@ -5,7 +5,8 @@
 <div class="relative flex min-h-full items-center justify-center px-4 py-12">
   <div class="absolute right-4 top-4">{% include "partials/theme_toggle.html" %}</div>
   <div class="w-full max-w-sm">
-    <h1 class="mb-6 text-xl font-semibold tracking-tight">Log in</h1>
+    <h1 class="mb-2 text-xl font-semibold tracking-tight">Log in</h1>
+    <p class="mb-6 text-sm text-neutral-500 dark:text-neutral-400">Use your account email address and password.</p>
 
     <form method="post" class="space-y-5 {{ auth_control_classes }}" data-loading-form>
       {% csrf_token %}
