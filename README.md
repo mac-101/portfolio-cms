@@ -167,7 +167,7 @@ backend/
 └── static/          Tailwind source
 ```
 
-## Roadmap
+## Open to contributions
 
 - Catalog Library: reusable content types such as experience, education and certifications
 - A hosted public portfolio page for people who don't want to build a frontend
