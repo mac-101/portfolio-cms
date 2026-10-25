@@ -8,7 +8,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
 
-**Live demo:** https://YOUR-LIVE-URL · **Docs:** https://YOUR-LIVE-URL/docs/ · **Status:** MVP in development
+**Live demo:** https://my-portfolio-cms-a0js.onrender.com · **Docs:** https://my-portfolio-cms-a0js.onrender.com/docs/ · **Status:** MVP in development
 
 <!-- Add a screenshot or short GIF here. It's the first thing people look at. -->
 ![Dashboard](docs/screenshots/dashboard.png)
@@ -69,7 +69,7 @@ GET /api/public/portfolios/<slug>/socials/          social links
 }
 ```
 
-Full reference with JavaScript and React examples is in the [docs](https://YOUR-LIVE-URL/docs/).
+Full reference with JavaScript and React examples is in the [docs](https://my-portfolio-cms-a0js.onrender.com/docs/).
 
 ## Engineering decisions
 
@@ -99,8 +99,8 @@ Full reference with JavaScript and React examples is in the [docs](https://YOUR-
 Requires Python, PostgreSQL and Git.
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
-cd YOUR-REPO
+git clone https://github.com/mac-101/portfolio-cms.git
+cd portfolio-cms
 
 python -m venv venv
 # Windows:  venv\Scripts\activate
@@ -181,7 +181,7 @@ Built by **MacAnthony**, a Python and web developer.
 
 - GitHub: [mac-101](https://github.com/mac-101)
 - Portfolio: [MacAnthony Charles](https://macanthonycharles.vercel.app)
-- LinkedIn: https://YOUR-LINKEDIN-URL
+- LinkedIn: [MacAnthony Charles](https://www.linkedin.com/in/macanthony-charles-561810367?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 - Email: charlesmacanthony797@gmail.com
 
 ## License
