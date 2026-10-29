@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for portfolio-cms-2f130g on 2026-10-29T22:59:06Z
+# fly.toml app configuration file generated for portfolio-cms-2f130g on 2026-10-29T23:06:18Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'portfolio-cms-2f130g'
-primary_region = 'ams'
+primary_region = 'cdg'
 console_command = '/code/manage.py shell'
 
 [build]
@@ -16,7 +16,7 @@ console_command = '/code/manage.py shell'
   PORT = '8000'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 8000
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
