@@ -208,10 +208,24 @@ if RENDER_HOST:
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 if RENDER_HOST:
     CSRF_TRUSTED_ORIGINS.append(f"https://{RENDER_HOST}")
+    
+FLY_APP_NAME = env("FLY_APP_NAME", default="")
+
+if FLY_APP_NAME:
+    FLY_HOST = f"{FLY_APP_NAME}.fly.dev"
+
+    if FLY_HOST not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(FLY_HOST)
+
+    FLY_ORIGIN = f"https://{FLY_HOST}"
+    if FLY_ORIGIN not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(FLY_ORIGIN)
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # so URLs show https
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    
+
 
 INTERNAL_IPS = ["127.0.0.1"]   # lets templates know when you're developing locally
